@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette for Hotel Amil
+     Bright signature red + crisp white + elegant typography */
+  --color-maroon-50: #fdf2f3;
+  --color-maroon-100: #fbe5e7;
+  --color-maroon-200: #f7ced2;
+  --color-maroon-300: #f0a7af;
+  --color-maroon-400: #e47582;
+  --color-maroon-500: #d44758;
+  --color-maroon-600: #c0262d;
+  --color-maroon-700: #a51d23;
+  --color-maroon-800: #88191f;
+  --color-maroon-900: #71191d;
+  --color-maroon-950: #3f090c;
+
+  --color-brand-red: #c0262d;
+  --color-brand-red-hover: #a51d23;
+  --color-brand-red-active: #8e151a;
+
+  --color-gold-50: #fcf9f2;
+  --color-gold-100: #f8f1de;
+  --color-gold-200: #f0e1bc;
+  --color-gold-300: #e4ca8e;
+  --color-gold-400: #d4ae58;
+  --color-gold-500: #c19335;
+  --color-gold-600: #a77827;
+  --color-gold-700: #855c21;
+  --color-gold-800: #6d4a21;
+  --color-gold-900: #5c3e20;
+
+  --color-cream: #ffffff;
+  --color-parchment: #ffffff;
+  --color-ink: #1c1917;
+  --color-muted: #57534e;
+
+  --font-display: var(--font-display, "Playfair Display", Georgia, "Times New Roman", serif);
+  --font-sans: var(--font-sans, "Plus Jakarta Sans", system-ui, -apple-system, sans-serif);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: #c0262d;
+  color: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f8f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #c0262d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a51d23;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.9s ease-out both;
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.hero-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.1) 25%,
+    transparent 50%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Luxury card styling helpers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(192, 38, 45, 0.2);
+}
+
+.glass-panel-dark {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(192, 38, 45, 0.2);
 }
