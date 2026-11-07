@@ -15,7 +15,7 @@ import { rooms } from "@/lib/rooms";
 export const metadata: Metadata = {
   title: "Hotel Amil — Premier 3-Star Luxury Hotel in Rajapalayam, Tamil Nadu",
   description:
-    "Experience 3-star hospitality at Hotel Amil Rajapalayam. Featuring deluxe & family rooms with hill-view balconies, Saffron Manor restaurant, swimming pool, Kings Bar, and grand banquet halls.",
+    "Experience 3-star hospitality at Hotel Amil Rajapalayam. Featuring deluxe & family rooms with hill-view balconies, Saffron Restaurant, swimming pool, Kings Bar, and grand banquet halls.",
 };
 
 export default function HomePage() {
@@ -33,7 +33,7 @@ export default function HomePage() {
       ctaLabel: "Explore rooms",
     },
     {
-      title: "Dining at Saffron Manor",
+      title: "Dining at Saffron Restaurant",
       description:
         "Relish rich Chettinad feasts, fragrant Biryanis, North Indian curries and Continental delicacies — with a complimentary breakfast buffet under the CP Plan.",
       image: "/images/reest.png",
@@ -53,49 +53,82 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="bg-white text-stone-900">
+    <main className="bg-[#FAF8F5] text-stone-900">
       {/* 1. Hero Dynamic Scroll Image Slider: Starts directly from bottom of header and covers the front screen */}
       <section
         id="home-hero"
-        className="relative pt-14 sm:pt-15 bg-white"
+        className="relative bg-[#1A1412]"
       >
-        <div className="relative h-[calc(100svh-3.5rem)] sm:h-[calc(100svh-3.75rem)] min-h-[480px] max-h-[920px] w-full overflow-hidden bg-white">
+        <div className="relative h-[calc(100svh-4rem)] sm:h-[calc(100svh-5rem)] min-h-[520px] max-h-[920px] w-full overflow-hidden bg-black">
           <HeroSlider
             slides={photoSlides}
-            dotsClassName="bottom-24 sm:bottom-26 lg:bottom-24"
+            dotsClassName="bottom-28 sm:bottom-32 lg:bottom-28"
           />
 
-          {/* Cinematic gradient overlays for contrast and readability */}
-          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+          {/* Cinematic subtle gradient overlay */}
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/25 to-black/45" />
 
-          {/* Floating booking bar placed directly on the front screen at the dynamic scroll image bottom */}
+          {/* Hero Headline Overlay: Experience Comfort & Elegance in Rajapalayam (Top Left Corner) */}
+          <div className="pointer-events-none absolute inset-x-0 top-5 sm:top-7 md:top-9 lg:top-10 z-20">
+            <Container className="w-full">
+              <div className="flex justify-start">
+                <div className="inline-flex flex-col items-start text-left px-2 sm:px-0 max-w-xl">
+                  {/* 3-Star Hotel Badge */}
+                  <div className="mb-2 sm:mb-2.5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-black/50 backdrop-blur-md px-3 py-0.5 sm:px-3.5 sm:py-1 border border-[#E5A93C]/40 shadow-md">
+                      <span className="text-[#E5A93C] text-[11px] sm:text-xs">★ ★ ★</span>
+                      <span className="text-[9.5px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] text-[#F5EEE6]">
+                        3-Star Hotel
+                      </span>
+                    </span>
+                  </div>
+
+                  <h1 className="font-display text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] font-medium leading-[1.2] tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.92)]">
+                    <span className="block text-white whitespace-nowrap">
+                      Experience Comfort &amp;
+                    </span>
+                    <span className="block mt-1 sm:mt-1.5 whitespace-nowrap">
+                      <span className="text-white">Elegance in </span>
+                      <span className="text-[#E5A93C]">Rajapalayam</span>
+                    </span>
+                  </h1>
+
+                  {/* Golden Luxury Divider Line with Centered Diamond Motif */}
+                  <div className="mt-2.5 sm:mt-3 flex items-center gap-2 w-full max-w-xs sm:max-w-sm">
+                    <div className="h-[1.5px] flex-1 bg-gradient-to-r from-[#E5A93C]/30 via-[#E5A93C] to-[#E5A93C]" />
+                    <div className="h-1.5 w-1.5 rotate-45 bg-[#E5A93C] shrink-0 shadow-xs" />
+                    <div className="h-[1.5px] flex-1 bg-gradient-to-l from-[#E5A93C]/30 via-[#E5A93C] to-[#E5A93C]" />
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </div>
+
+          {/* Floating booking bar placed cleanly at bottom of hero */}
           <div
             id="check-availability"
-            className="absolute bottom-2.5 sm:bottom-3.5 lg:bottom-4 left-0 right-0 z-30 px-3 sm:px-6 pointer-events-auto"
+            className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-0 right-0 z-30 px-3 sm:px-6 pointer-events-auto"
           >
-            <div className="mx-auto max-w-4xl rounded-2xl border border-stone-200 bg-white/95 backdrop-blur-md p-2 sm:p-2.5 sm:px-4 shadow-2xl">
+            <div className="mx-auto max-w-4xl rounded-2xl border border-[#D8A34F]/30 bg-[#FAF7F2]/95 backdrop-blur-md p-3 sm:p-4 shadow-2xl ring-1 ring-black/5">
               <HeroSearch />
             </div>
           </div>
         </div>
-
-        {/* Accessible heading for SEO */}
-        <h1 className="sr-only">Hotel Amil — Premier 3-Star Luxury Hotel in Rajapalayam</h1>
       </section>
 
       {/* 2. About Hotel Amil: Clean, Spacious Editorial Showcase */}
-      <section className="py-10 lg:py-14 bg-white">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#FAF8F5]">
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-12">
+          <div className="grid items-center gap-12 lg:grid-cols-12">
             {/* Story & Philosophy */}
             <div className="lg:col-span-6">
-              <p className="text-xs font-bold tracking-[0.25em] text-[#c0262d] uppercase">
+              <p className="text-xs font-semibold tracking-[0.25em] text-[#D8A34F] uppercase">
                 Welcome to Our Haven
               </p>
-              <h2 className="mt-2.5 font-display text-3xl font-semibold leading-snug text-stone-900 sm:text-4xl">
+              <h2 className="mt-3 font-display text-3xl font-normal tracking-tight leading-snug text-[#1C1917] sm:text-4xl lg:text-[2.75rem]">
                 A refined 3-star escape nestled in the foothills of Rajapalayam
               </h2>
-              <div className="mt-4 space-y-3.5 text-base leading-relaxed text-stone-600">
+              <div className="mt-5 space-y-4 text-base leading-relaxed text-stone-600 font-sans">
                 <p>
                   Conveniently situated along Tenkasi Main Road, Hotel Amil is the landmark of
                   distinguished hospitality in Rajapalayam. Whether travelling for leisure,
@@ -108,63 +141,52 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Stats & Trust Signals */}
-              <div className="mt-6 grid grid-cols-3 gap-6 border-t border-stone-200 pt-5">
+              {/* Minimalist Editorial Trust Indicators */}
+              <div className="mt-8 flex flex-wrap items-center gap-6 sm:gap-10 border-t border-[#D8A34F]/30 pt-6">
                 <div>
-                  <p className="font-display text-3xl font-bold text-[#c0262d]">84+</p>
-                  <p className="mt-1 text-xs text-stone-500">Luxury Rooms &amp; Suites</p>
+                  <p className="font-display text-3xl sm:text-4xl font-semibold text-[#B88E3E]">84+</p>
+                  <p className="mt-1 text-xs font-semibold text-[#8C6B32] uppercase tracking-wider">Rooms &amp; Suites</p>
                 </div>
+                <div className="hidden sm:block h-8 w-px bg-[#D8A34F]/30" />
                 <div>
-                  <p className="font-display text-3xl font-bold text-[#c0262d]">3★</p>
-                  <p className="mt-1 text-xs text-stone-500">Government Certified</p>
+                  <p className="font-display text-3xl sm:text-4xl font-semibold text-[#B88E3E]">3★</p>
+                  <p className="mt-1 text-xs font-semibold text-[#8C6B32] uppercase tracking-wider">Govt. Certified</p>
                 </div>
+                <div className="hidden sm:block h-8 w-px bg-[#D8A34F]/30" />
                 <div>
-                  <p className="font-display text-3xl font-bold text-[#c0262d]">4.7</p>
-                  <p className="mt-1 text-xs text-stone-500">Guest Satisfaction</p>
+                  <p className="font-display text-3xl sm:text-4xl font-semibold text-[#B88E3E]">4.7</p>
+                  <p className="mt-1 text-xs font-semibold text-[#8C6B32] uppercase tracking-wider">Guest Rating</p>
                 </div>
               </div>
 
-              <div className="mt-6 flex items-center gap-4">
+              <div className="mt-8 flex items-center gap-4">
                 <Link
                   href="/rooms"
-                  className="rounded-xl bg-[#c0262d] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#a51d23]"
+                  className="rounded-full bg-[#382314] px-7 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:bg-[#4A301D] hover:shadow-md"
                 >
                   Explore Rooms
                 </Link>
                 <Link
                   href="/facilities"
-                  className="rounded-xl border-2 border-[#c0262d] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-[#c0262d] transition hover:bg-[#c0262d] hover:text-white bg-white shadow-sm"
+                  className="rounded-full border border-stone-300 px-7 py-3 text-xs font-semibold uppercase tracking-wider text-stone-800 transition-all duration-300 hover:border-[#382314] hover:text-[#382314] bg-white shadow-xs"
                 >
                   Hotel Facilities
                 </Link>
               </div>
             </div>
 
-            {/* Clean, Artistic YouTube Video Frame */}
+            {/* Luxury Front Hero Image Frame */}
             <div className="relative lg:col-span-6">
-              <div className="relative aspect-video w-full overflow-hidden rounded-3xl shadow-2xl border border-stone-200 bg-black">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/z4BrL1BRVtU?rel=0&modestbranding=1"
-                  title="Hotel Amil Rajapalayam Video Tour"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full border-0"
+              <div className="group relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-xl border border-stone-200/80 bg-stone-100">
+                <Image
+                  src="/images/fronthero.jpeg"
+                  alt="Hotel Amil Front View and Grand Entrance in Rajapalayam"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  priority
                 />
-              </div>
-
-              {/* Floating luxury badge */}
-              <div className="hidden sm:block absolute -bottom-5 left-6 rounded-2xl bg-white/95 p-3.5 shadow-xl border border-stone-200 max-w-xs backdrop-blur-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-50 text-[#c0262d]">
-                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-stone-900">Exceptional Hospitality</p>
-                    <p className="text-[11px] text-stone-500">Watch our hotel video tour</p>
-                  </div>
-                </div>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
               </div>
             </div>
           </div>
@@ -172,7 +194,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Featured Accommodations */}
-      <section className="bg-white py-10 lg:py-14 border-y border-stone-200">
+      <section className="bg-white py-16 sm:py-20 lg:py-24 border-y border-stone-200/80">
         <Container>
           <SectionTitle
             eyebrow="Accommodations"
@@ -180,73 +202,73 @@ export default function HomePage() {
             description="All rooms feature hill-view balconies, individual climate control, complimentary breakfast under the CP Plan, and high-speed Wi-Fi."
           />
 
-          <div className="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 sm:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {featuredRooms.map((room) => (
               <RoomCard key={room.slug} room={room} />
             ))}
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-12 text-center">
             <Link
               href="/rooms"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#c0262d] px-8 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#a51d23]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#382314] px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:bg-[#4A301D] hover:shadow-md"
             >
               <span>View All 4 Room Categories</span>
-              <span>→</span>
+              <span aria-hidden="true" className="text-[#D8A34F]">→</span>
             </Link>
           </div>
         </Container>
       </section>
 
       {/* 4. Hotel Highlights: Rooms, Dining & Celebrations (reusable cards) */}
-      <section className="py-10 lg:py-14 bg-white">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#FAF8F5]">
         <Container>
           <SectionTitle
             eyebrow="Hotel Highlights"
             title="Stay, dine and celebrate under one roof"
-            description="From refined rooms and Saffron Manor dining to grand celebrations — everything you need for an effortless visit to Rajapalayam."
+            description="From refined rooms and Saffron Restaurant dining to grand celebrations — everything you need for an effortless visit to Rajapalayam."
           />
 
-          <div className="mt-8 sm:mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 sm:mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {highlights.map((item) => (
               <HighlightCard key={item.href} {...item} />
             ))}
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-12 text-center">
             <Link
               href="/facilities"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#c0262d] px-8 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#a51d23]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#382314] px-8 py-3.5 text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:bg-[#4A301D] hover:shadow-md"
             >
               <span>Explore All Facilities &amp; Timings</span>
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true" className="text-[#D8A34F]">→</span>
             </Link>
           </div>
         </Container>
       </section>
 
       {/* 5. Clean Curated Photo Showcase (Neat, In Order, Not Cramped) */}
-      <section className="bg-white py-10 text-stone-900 lg:py-14 border-t border-stone-200">
+      <section className="bg-white py-16 sm:py-20 lg:py-24 border-t border-stone-200/80">
         <Container>
           <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
             <div>
-              <p className="text-xs font-bold tracking-[0.25em] text-[#c0262d] uppercase">
+              <p className="text-xs font-semibold tracking-[0.25em] text-[#D8A34F] uppercase">
                 Visual Journey
               </p>
-              <h2 className="mt-2 font-display text-3xl font-semibold text-stone-900 sm:text-4xl">
+              <h2 className="mt-2 font-display text-3xl font-normal tracking-tight text-[#1C1917] sm:text-4xl">
                 A glimpse of life at Hotel Amil
               </h2>
             </div>
             <Link
               href="/gallery"
-              className="rounded-xl bg-[#c0262d] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#a51d23]"
+              className="rounded-full bg-[#382314] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:bg-[#4A301D]"
             >
               Browse Full Gallery (20+ Photos) →
             </Link>
           </div>
 
           {/* Clean 4-card showcase with actual authentic photos in thematic order */}
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 sm:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 title: "Grand Entrance",
@@ -259,7 +281,7 @@ export default function HomePage() {
                 img: "/images/deluxe1.jpeg",
               },
               {
-                title: "Saffron Manor",
+                title: "Saffron Restaurant",
                 category: "Fine Dining",
                 img: "/images/reest.png",
               },
@@ -272,21 +294,21 @@ export default function HomePage() {
               <Link
                 key={pic.title}
                 href="/gallery"
-                className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-200 shadow-sm"
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-stone-200/90 shadow-xs transition-all duration-500 hover:-translate-y-1 hover:border-[#382314]/40 hover:shadow-xl"
               >
                 <Image
                   src={pic.img}
                   alt={pic.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 transition group-hover:opacity-60" />
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <p className="text-[10px] font-bold tracking-widest text-red-300 uppercase">
+                  <p className="text-[10px] font-semibold tracking-[0.2em] text-[#D8A34F] uppercase">
                     {pic.category}
                   </p>
-                  <p className="font-display text-base font-semibold text-white">{pic.title}</p>
+                  <p className="font-display text-base font-medium text-white">{pic.title}</p>
                 </div>
               </Link>
             ))}
@@ -298,17 +320,17 @@ export default function HomePage() {
       <GoogleReviews />
 
       {/* 7. Direct Booking Guarantee Banner */}
-      <section className="bg-white py-10 lg:py-14 text-stone-900 border-t border-stone-200">
+      <section className="bg-[#FAF8F5] py-16 sm:py-20 lg:py-24 border-t border-stone-200/80">
         <Container>
-          <div className="rounded-3xl border border-stone-200 bg-white p-8 sm:p-10 shadow-sm flex flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
+          <div className="rounded-3xl border border-stone-200/80 bg-white p-8 sm:p-12 shadow-sm flex flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
             <div className="max-w-xl">
-              <span className="text-xs font-bold tracking-widest text-[#c0262d] uppercase">
+              <span className="text-xs font-semibold tracking-[0.25em] text-[#D8A34F] uppercase">
                 Best Rate Guarantee
               </span>
-              <h2 className="mt-2 font-display text-2xl font-semibold sm:text-3xl text-stone-900">
+              <h2 className="mt-2 font-display text-2xl font-normal sm:text-3xl tracking-tight text-[#1C1917]">
                 Reserve your stay directly with Hotel Amil
               </h2>
-              <p className="mt-2 text-sm text-stone-600">
+              <p className="mt-2 text-sm text-stone-600 leading-relaxed font-sans">
                 Direct bookings include complimentary breakfast, free Wi-Fi, flexible cancellation,
                 and priority room allocation.
               </p>
@@ -316,13 +338,30 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/rooms"
-                className="rounded-xl bg-[#c0262d] px-7 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#a51d23]"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-2.5 font-display text-xs sm:text-[13px] font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all duration-300 ease-out cursor-pointer select-none active:scale-97 shrink-0 border-[1.5px] border-[#D4A346] hover:border-[#E8B85A] hover:text-[#FFF6E9] shadow-[0_2px_8px_rgba(20,10,5,0.3),inset_0_1px_1px_rgba(255,235,180,0.18)] hover:shadow-[0_4px_14px_rgba(30,16,8,0.45),inset_0_1px_1.5px_rgba(255,235,180,0.28)]"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 50% 25%, #3E2716 0%, #25160C 65%, #150B05 100%)",
+                }}
               >
-                Book Online Now
+                <span className="relative z-10 flex items-center gap-2">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 fill-[#D4A346] transition-transform duration-300 group-hover:scale-105 group-hover:fill-[#E8B85A]"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm14 6H4v12h16V8zm-13 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"
+                    />
+                  </svg>
+                  <span>BOOK ONLINE NOW</span>
+                </span>
               </Link>
               <a
                 href={`tel:${siteConfig.phones[0].replace(/\s/g, "")}`}
-                className="rounded-xl border-2 border-[#c0262d] px-7 py-3 text-xs font-bold uppercase tracking-wider text-[#c0262d] transition hover:bg-[#c0262d] hover:text-white bg-white shadow-sm"
+                className="rounded-full border border-stone-300 px-8 py-3 text-xs font-semibold uppercase tracking-wider text-stone-800 transition-all duration-300 hover:border-[#382314] hover:text-[#382314] bg-white shadow-xs"
               >
                 Call Front Desk
               </a>

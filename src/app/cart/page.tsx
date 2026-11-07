@@ -6,22 +6,18 @@ import { formatCurrency, formatDate } from "@/lib/booking";
 import { ImagePlaceholder } from "@/components/shared/ImagePlaceholder";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 
 function PageShell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="bg-white text-stone-900">
-      <section className="bg-[#c0262d] pt-24 sm:pt-28 pb-10 sm:pb-12 text-white border-b border-red-900/30 shadow-inner">
-        <Container>
-          <p className="text-xs sm:text-sm font-bold tracking-[0.2em] text-gold-300 uppercase">Booking</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl text-white">
-            Your booking cart
-          </h1>
-          <p className="mt-3 max-w-2xl text-white/90">
-            Review your selections before continuing to guest details.
-          </p>
-        </Container>
-      </section>
-      <section className="bg-white py-14">{children}</section>
+    <main className="bg-[#FAF8F5] text-stone-900">
+      <PageHero
+        eyebrow="RESERVATION"
+        title="Your Booking Cart"
+        description="Review your selections before continuing to guest details and instant confirmation."
+        variant="booking"
+      />
+      <section className="py-14 sm:py-16">{children}</section>
     </main>
   );
 }
@@ -54,7 +50,7 @@ export default function CartPage() {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col gap-4 rounded-2xl border border-maroon-100 bg-white p-4 shadow-sm sm:flex-row"
+                className="flex flex-col gap-4 rounded-2xl border border-stone-200/80 bg-white p-5 shadow-xs sm:flex-row"
               >
                 <ImagePlaceholder
                   name={item.roomSlug}
@@ -63,63 +59,63 @@ export default function CartPage() {
                 <div className="flex flex-1 flex-col">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h2 className="font-display text-xl font-semibold text-maroon-900">
+                      <h2 className="font-display text-xl font-medium text-[#1C1917]">
                         {item.roomName}
                       </h2>
-                      <p className="text-sm text-muted">
+                      <p className="text-sm text-stone-500 font-sans">
                         {formatDate(item.checkIn)} → {formatDate(item.checkOut)} ·{" "}
                         {item.nights} night{item.nights > 1 ? "s" : ""}
                       </p>
-                      <p className="mt-1 text-sm text-maroon-800">
+                      <p className="mt-1 text-sm text-[#382314] font-medium font-sans">
                         {item.adults} adult{item.adults > 1 ? "s" : ""}
                         {item.children > 0 && `, ${item.children} child${item.children > 1 ? "ren" : ""}`}
                       </p>
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="text-sm text-red-500 hover:underline"
+                      className="text-sm text-stone-400 hover:text-red-600 transition-colors cursor-pointer"
                     >
                       Remove
                     </button>
                   </div>
 
-                  <div className="mt-auto flex items-center justify-between pt-4 text-sm">
-                    <span className="text-muted">
+                  <div className="mt-auto flex items-center justify-between pt-4 text-sm font-sans">
+                    <span className="text-stone-500">
                       {formatCurrency(item.roomPrice)} × {item.nights}
                       {item.extraPersonTotal > 0 && " + extra persons"}
                     </span>
-                    <span className="text-base font-bold text-maroon-900">
+                    <span className="text-base font-bold text-[#1C1917]">
                       {formatCurrency(item.total)}
                     </span>
                   </div>
                 </div>
               </div>
             ))}
-            <button onClick={() => clearCart()} className="text-sm text-maroon-600 underline">
+            <button onClick={() => clearCart()} className="text-sm text-stone-500 hover:text-stone-800 underline cursor-pointer">
               Clear all
             </button>
           </div>
 
-          <aside className="h-fit rounded-2xl border border-maroon-100 bg-white p-6 shadow-sm lg:sticky lg:top-24">
-            <h2 className="font-display text-xl font-semibold text-maroon-900">Summary</h2>
-            <dl className="mt-4 space-y-3 text-sm">
+          <aside className="h-fit rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-7 shadow-xs lg:sticky lg:top-24">
+            <h2 className="font-display text-xl font-medium text-[#1C1917]">Summary</h2>
+            <dl className="mt-4 space-y-3 text-sm font-sans">
               <div className="flex justify-between">
-                <dt className="text-muted">Rooms ({items.length})</dt>
-                <dd className="font-medium text-maroon-900">{formatCurrency(total)}</dd>
+                <dt className="text-stone-500">Rooms ({items.length})</dt>
+                <dd className="font-medium text-stone-900">{formatCurrency(total)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-muted">GST</dt>
-                <dd className="font-medium text-maroon-900">Included in price</dd>
+                <dt className="text-stone-500">GST</dt>
+                <dd className="font-medium text-stone-900">Included in price</dd>
               </div>
-              <div className="flex justify-between border-t border-maroon-100 pt-3 text-base">
-                <dt className="font-semibold text-maroon-900">Estimated Total</dt>
-                <dd className="font-bold text-gold-600">{formatCurrency(total)}</dd>
+              <div className="flex justify-between border-t border-stone-100 pt-3 text-base">
+                <dt className="font-semibold text-stone-900">Estimated Total</dt>
+                <dd className="font-bold text-[#382314]">{formatCurrency(total)}</dd>
               </div>
             </dl>
             <Button href="/checkout" size="lg" className="mt-6 w-full">
               Proceed to Guest Details
             </Button>
-            <p className="mt-3 text-center text-xs text-muted">
+            <p className="mt-3 text-center text-xs text-stone-500 font-sans">
               Free cancellation up to 7 days before check-in. GST included.
             </p>
           </aside>

@@ -137,7 +137,7 @@ export const rooms: Room[] = [
     size: "One Room Suite",
     view: "Hill View",
     images: ["double1", "double2", "cuboard1"],
-    panorama360: "/images/360/room-360.jpg",
+    panorama360: "/images/360/Executivedouble360-room.png",
     amenities: roomAmenities.map((a) => a.name),
     featured: true,
   },

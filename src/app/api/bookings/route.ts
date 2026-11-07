@@ -11,7 +11,7 @@ import {
   validateBookingDates,
   verifyAdminAuth,
   validateCsrfOrigin,
-  maskPII,
+  generateSecureId,
 } from "@/lib/security";
 
 // In-memory fallback repository when DATABASE_URL is not yet provisioned
@@ -143,11 +143,8 @@ export async function POST(request: NextRequest) {
 
     const pricing = pricingRes.pricing;
 
-    // Unique Cryptographically Random Booking Reference ID: AH-YEAR-RANDOM
-    const bookingId = `AH-${new Date().getFullYear()}-${Math.random()
-      .toString(36)
-      .substring(2, 8)
-      .toUpperCase()}`;
+    // Unique Cryptographically Secure Booking Reference ID: AH-YEAR-RANDOM
+    const bookingId = generateSecureId(`AH-${new Date().getFullYear()}`, 3);
 
     const newBooking: BookingRecord = {
       id: bookingId,
@@ -249,7 +246,13 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for") || "127.0.0.1";
-    checkRateLimit(ip, 30, 60000);
+    const rateCheck = checkRateLimit(`bookings-get:${ip}`, 30, 60000);
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait a moment." },
+        { status: 429 }
+      );
+    }
 
     const { searchParams } = new URL(request.url);
     const lookupId = sanitizeText(searchParams.get("id") || "", 64);

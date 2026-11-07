@@ -1,4 +1,4 @@
-import { getRoomBySlug, Room, EXTRA_PERSON_CHARGE } from "./rooms";
+import { getRoomBySlug, EXTRA_PERSON_CHARGE } from "./rooms";
 
 /**
  * Indian Hotel GST Pricing Engine (SAC Code 9963)

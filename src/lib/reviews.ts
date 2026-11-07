@@ -32,7 +32,7 @@ export const reviews: Review[] = [
     rating: 4,
     date: "15 Jun 2026",
     comment:
-      "Good value for money. Rooms are spacious and the breakfast spread at Saffron Manor was wonderful. Parking is very spacious too.",
+      "Good value for money. Rooms are spacious and the breakfast spread at Saffron Restaurant was wonderful. Parking is very spacious too.",
     source: "Google",
   },
   {

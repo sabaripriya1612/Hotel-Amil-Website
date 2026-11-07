@@ -16,65 +16,56 @@ export function RoomCard({
   return (
     <Link
       href={`/rooms/${room.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-xs transition-all duration-500 hover:-translate-y-1 hover:border-[#382314]/40 hover:shadow-xl h-full"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden bg-stone-100 shrink-0">
         <ImagePlaceholder
           name={room.images[0]}
-          label="Hotel Amil · Rajapalayam"
-          className="transition-transform duration-500 group-hover:scale-105"
+          alt={room.name}
+          className="transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <span className="absolute right-3 top-3 rounded-full bg-[#c0262d] px-3 py-1 text-xs font-bold text-white shadow-md">
+        <span className="absolute right-3 top-3 rounded-full bg-[#382314] px-3.5 py-1 text-xs font-semibold text-[#F5EEE6] shadow-sm border border-[#D8A34F]/40 backdrop-blur-xs">
           {formatPrice(room.price)} / night
         </span>
-        {room.maxGuests > 2 && (
-          <span className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-stone-900 shadow-sm border border-stone-200">
-            {room.maxGuests}+{room.maxExtraPersons} Persons
-          </span>
-        )}
-
-        {/* Live Booking & In-Service Status Indicator on Image */}
         {booked ? (
-          <span className="absolute left-3 bottom-3 rounded-full bg-[#c0262d]/95 px-3 py-1 text-[11px] font-bold text-white shadow-lg backdrop-blur flex items-center gap-1.5 border border-red-400/40">
-            <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
-            Already Booked · In Service
+          <span className="absolute left-3 top-3 rounded-full bg-red-600/95 backdrop-blur-xs px-3 py-1 text-xs font-semibold text-white shadow-xs">
+            Booked
           </span>
-        ) : availability !== undefined && availability > 0 ? (
-          <span className="absolute left-3 bottom-3 rounded-full bg-emerald-800/90 px-2.5 py-1 text-[11px] font-semibold text-white shadow backdrop-blur flex items-center gap-1.5 border border-emerald-400/30">
-            <span className="h-2 w-2 rounded-full bg-emerald-300" />
-            {availability} Room{availability > 1 ? "s" : ""} Available · In Service
+        ) : room.maxGuests > 2 ? (
+          <span className="absolute left-3 top-3 rounded-full bg-white/95 backdrop-blur-xs px-3 py-1 text-xs font-medium text-stone-800 shadow-xs border border-stone-200/80">
+            {room.maxGuests}+{room.maxExtraPersons} Persons
           </span>
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-bold uppercase tracking-widest text-[#c0262d]">
-          {room.type} Room
-        </p>
-        <h3 className="mt-1 font-display text-xl font-semibold text-stone-900 group-hover:text-[#c0262d] transition-colors">
-          {room.name}
-        </h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-stone-600">
-          {room.shortDescription}
-        </p>
+      <div className="flex flex-1 flex-col p-5 sm:p-6 justify-between">
+        <div>
+          <h3 className="font-display text-xl sm:text-2xl font-medium tracking-tight text-[#1C1917] group-hover:text-[#382314] transition-colors line-clamp-1">
+            {room.name}
+          </h3>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-stone-600 min-h-[2.5rem]">
+            {room.shortDescription}
+          </p>
 
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {room.amenities.slice(0, 4).map((amenity) => (
-            <span
-              key={amenity}
-              className="rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-700"
-            >
-              {amenity}
-            </span>
-          ))}
+          <div className="mt-4 flex flex-wrap gap-1.5 min-h-[3.25rem] content-start">
+            {room.amenities.slice(0, 4).map((amenity) => (
+              <span
+                key={amenity}
+                className="rounded-full bg-[#FAF8F5] px-2.5 py-1 text-xs font-medium text-stone-600 border border-stone-200/70"
+              >
+                {amenity}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="mt-5 flex items-center justify-between border-t border-stone-100 pt-4">
           <span className="text-xs text-stone-500">
-            Incl. tax · CP Plan · Cancellation friendly
+            Incl. tax · CP Plan · Free Cancellation
           </span>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#c0262d] group-hover:text-[#a51d23]">
-            View Room →
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#382314] group-hover:text-[#4A301D] inline-flex items-center gap-1.5 transition-colors shrink-0 ml-2">
+            <span>View Room</span>
+            <span aria-hidden="true" className="text-[#D8A34F] transition-transform duration-300 group-hover:translate-x-1">→</span>
           </span>
         </div>
       </div>

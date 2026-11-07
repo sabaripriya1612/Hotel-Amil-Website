@@ -78,7 +78,7 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "g10",
     src: "restaurant",
-    title: "Saffron Manor Restaurant",
+    title: "Saffron Restaurant",
     description: "Multi-cuisine fine dining serving Chettinad, Indian & Continental",
     category: "Dining",
   },
@@ -94,6 +94,13 @@ export const galleryItems: GalleryItem[] = [
     src: "cafe",
     title: "Amil 24/7 Cafe",
     description: "Artisan filter coffee, fresh teas, snacks and confectionery",
+    category: "Dining",
+  },
+  {
+    id: "g12b",
+    src: "cafe-bathroom",
+    title: "Amil Cafe Restrooms",
+    description: "Clean and neat washroom facilities for cafe guests",
     category: "Dining",
   },
   {

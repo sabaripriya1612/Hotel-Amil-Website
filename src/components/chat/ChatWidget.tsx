@@ -146,9 +146,9 @@ export function ChatWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close assistant" : "Open AI assistant"}
         aria-expanded={open}
-        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#c0262d] text-white shadow-lg shadow-black/20 transition-transform hover:scale-110 hover:bg-[#a51d23] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c0262d]"
+        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#382314] text-white shadow-xl shadow-black/20 transition-all duration-300 hover:scale-105 hover:bg-[#4A301D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#382314] border border-[#D8A34F]/30 cursor-pointer"
       >
-        <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full bg-emerald-400 ring-2 ring-[#c0262d]" />
+        <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full bg-emerald-400 ring-2 ring-[#382314]" />
         {open ? (
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.2">
             <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
@@ -162,49 +162,49 @@ export function ChatWidget() {
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-24 right-4 z-50 flex max-h-[70vh] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-2xl shadow-black/30">
-          <div className="flex items-center justify-between bg-[#c0262d] px-4 py-3 text-white">
+        <div className="fixed bottom-24 right-4 z-50 flex max-h-[70vh] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-2xl shadow-black/20">
+          <div className="flex items-center justify-between bg-gradient-to-r from-[#29180C] to-[#382C28] px-4 py-3 text-white">
             <div>
-              <p className="font-display text-lg leading-tight font-bold">{siteConfig.name} Assistant</p>
-              <p className="flex items-center gap-1.5 text-xs text-white/90">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Online · replies instantly
+              <p className="font-display text-base leading-tight font-bold tracking-wide">{siteConfig.name} Concierge</p>
+              <p className="flex items-center gap-1.5 text-xs text-[#F5EEE6]/85 mt-0.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Online · instant answers
               </p>
             </div>
             <a
               href={chatLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-[#25d366] px-3 py-1.5 text-xs font-semibold text-white shadow-sm"
+              className="rounded-full bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors"
             >
               WhatsApp
             </a>
           </div>
 
-          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-stone-50 p-4">
+          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-[#FAF8F5] p-4">
             {messages.length === 0 && (
-              <div className="rounded-2xl rounded-tl-sm bg-white px-3 py-2.5 text-sm text-stone-800 shadow-sm border border-stone-100">
-                Hi! Ask anything about your stay…
+              <div className="rounded-2xl rounded-tl-sm bg-white px-3.5 py-2.5 text-sm text-stone-800 shadow-xs border border-stone-200/70">
+                Vanakkam! Ask anything about your stay…
               </div>
             )}
             {messages.map((m, i) => (
               <div
                 key={i}
                 className={cn(
-                  "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm",
+                  "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-xs",
                   m.from === "bot"
-                    ? "rounded-tl-sm bg-white text-stone-800 border border-stone-100"
-                    : "ml-auto rounded-tr-sm bg-[#c0262d] text-white font-medium"
+                    ? "rounded-tl-sm bg-white text-stone-800 border border-stone-200/70"
+                    : "ml-auto rounded-tr-sm bg-[#382314] text-white font-medium"
                 )}
               >
                 {m.text}
               </div>
             ))}
             {typing && (
-              <div className="flex items-center gap-1 rounded-2xl rounded-tl-sm bg-white px-3.5 py-2.5 shadow-sm border border-stone-100 w-fit">
+              <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm bg-white px-3.5 py-2.5 shadow-xs border border-stone-200/70 w-fit">
                 {[0, 1, 2].map((d) => (
                   <span
                     key={d}
-                    className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#c0262d]"
+                    className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#382314]"
                     style={{ animationDelay: `${d * 120}ms` }}
                   />
                 ))}
@@ -218,7 +218,7 @@ export function ChatWidget() {
                 key={q}
                 type="button"
                 onClick={() => send(q)}
-                className="rounded-full border border-[#c0262d]/20 bg-white px-2.5 py-1 text-xs font-medium text-[#c0262d] transition-colors hover:bg-[#c0262d] hover:text-white cursor-pointer"
+                className="rounded-full border border-stone-200/90 bg-stone-50 px-2.5 py-1 text-xs font-medium text-stone-700 transition-colors hover:bg-[#382314] hover:text-white hover:border-[#382314] cursor-pointer"
               >
                 {q}
               </button>
@@ -226,7 +226,7 @@ export function ChatWidget() {
           </div>
 
           <form
-            className="flex items-center gap-2 p-3 bg-white"
+            className="flex items-center gap-2 p-3 bg-white border-t border-stone-100"
             onSubmit={(e) => {
               e.preventDefault();
               send(input);
@@ -236,14 +236,14 @@ export function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a question…"
-              className="h-11 flex-1 rounded-full border border-stone-200 bg-stone-50 px-4 text-sm text-stone-900 outline-none focus:border-[#c0262d]"
+              className="h-10 flex-1 rounded-full border border-stone-200 bg-stone-50 px-4 text-xs sm:text-sm text-stone-900 outline-none focus:border-[#382314] focus:bg-white transition-colors"
             />
             <button
               type="submit"
               aria-label="Send"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#c0262d] text-white transition-colors hover:bg-[#a51d23] cursor-pointer shadow-sm"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#382314] text-white transition-all hover:bg-[#4A301D] active:scale-95 cursor-pointer shadow-sm"
             >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
                 <path d="M3.4 20.4l17-7.4a1 1 0 0 0 0-1.8l-17-7.4a1 1 0 0 0-1.4 1.1l1.6 6.2 11.4 1.9-11.4 1.9-1.6 6.2a1 1 0 0 0 1.4 1.1z" />
               </svg>
             </button>

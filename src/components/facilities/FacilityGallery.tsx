@@ -40,7 +40,7 @@ export function FacilityGallery({ name, slides }: { name: string; slides: string
       <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
         {slides.map((src, i) => (
           <div
-            key={src}
+            key={`${src}-${i}`}
             aria-hidden={i === current ? undefined : true}
             className={cn(
               "absolute inset-0 transition-opacity duration-1000 ease-in-out",
@@ -67,7 +67,7 @@ export function FacilityGallery({ name, slides }: { name: string; slides: string
                 restart();
               }}
               aria-label="Previous photo"
-              className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-maroon-950/40 text-white backdrop-blur transition-colors hover:bg-maroon-900/70"
+              className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#29180C]/60 text-white backdrop-blur transition-all hover:bg-[#382314]"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path d="M15 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,7 +80,7 @@ export function FacilityGallery({ name, slides }: { name: string; slides: string
                 restart();
               }}
               aria-label="Next photo"
-              className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-maroon-950/40 text-white backdrop-blur transition-colors hover:bg-maroon-900/70"
+              className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#29180C]/60 text-white backdrop-blur transition-all hover:bg-[#382314]"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
@@ -89,7 +89,7 @@ export function FacilityGallery({ name, slides }: { name: string; slides: string
             <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
               {slides.map((src, i) => (
                 <button
-                  key={src}
+                  key={`${src}-${i}`}
                   type="button"
                   aria-label={`Show photo ${i + 1}`}
                   onClick={() => {
@@ -112,7 +112,7 @@ export function FacilityGallery({ name, slides }: { name: string; slides: string
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
           {slides.map((src, i) => (
             <button
-              key={src}
+              key={`${src}-${i}`}
               type="button"
               onClick={() => {
                 setCurrent(i);

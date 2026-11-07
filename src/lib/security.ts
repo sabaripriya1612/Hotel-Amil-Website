@@ -128,6 +128,64 @@ export function validateBookingDates(
   return { valid: true, nights };
 }
 
+import crypto from "crypto";
+
+/**
+ * Generate a cryptographically secure random identifier.
+ * Example: generateSecureId("AH-2026", 4) -> "AH-2026-A1B2C3D4"
+ */
+export function generateSecureId(prefix: string, bytes: number = 4): string {
+  const random = crypto.randomBytes(bytes).toString("hex").toUpperCase();
+  return prefix ? `${prefix}-${random}` : random;
+}
+
+/**
+ * Generate an HMAC-signed session token for administrative users.
+ * Avoids storing raw passwords or master API keys in browser cookies.
+ */
+export function createAdminSessionToken(): string {
+  const sessionSecret =
+    process.env.ADMIN_SESSION_SECRET ||
+    process.env.ADMIN_API_KEY ||
+    "amil-session-fallback-secret-2026";
+  const timestamp = Date.now().toString();
+  const signature = crypto
+    .createHmac("sha256", sessionSecret)
+    .update(`admin:staff:${timestamp}`)
+    .digest("hex");
+  return `${timestamp}.${signature}`;
+}
+
+/**
+ * Verify an administrative session token.
+ * Token format: timestamp.signature (valid for 7 days)
+ */
+export function verifyAdminSessionToken(token: string): boolean {
+  if (!token || typeof token !== "string") return false;
+  const parts = token.split(".");
+  if (parts.length !== 2) return false;
+
+  const [timestampStr, signature] = parts;
+  const timestamp = parseInt(timestampStr, 10);
+  if (isNaN(timestamp)) return false;
+
+  // Max age: 7 days
+  const maxAgeMs = 7 * 24 * 60 * 60 * 1000;
+  if (Date.now() - timestamp > maxAgeMs) return false;
+
+  const sessionSecret =
+    process.env.ADMIN_SESSION_SECRET ||
+    process.env.ADMIN_API_KEY ||
+    "amil-session-fallback-secret-2026";
+
+  const expectedSignature = crypto
+    .createHmac("sha256", sessionSecret)
+    .update(`admin:staff:${timestampStr}`)
+    .digest("hex");
+
+  return timingSafeEqual(signature, expectedSignature);
+}
+
 /**
  * Verify administrative authorization header or cookie.
  * Uses timing-safe comparison to prevent timing side-channel attacks.
@@ -161,11 +219,17 @@ export function verifyAdminAuth(req: {
     return true;
   }
 
-  // 3. Check admin session cookie if available
+  // 3. Check admin session cookie if available (supports HMAC signed token and legacy key)
   if (req.cookies) {
     const cookieToken = req.cookies.get("amil_admin_session")?.value;
-    if (cookieToken && timingSafeEqual(cookieToken.trim(), effectiveSecret)) {
-      return true;
+    if (cookieToken) {
+      if (verifyAdminSessionToken(cookieToken.trim())) {
+        return true;
+      }
+      // Fallback check for direct key comparison (legacy)
+      if (timingSafeEqual(cookieToken.trim(), effectiveSecret)) {
+        return true;
+      }
     }
   }
 

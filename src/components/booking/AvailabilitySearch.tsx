@@ -119,7 +119,7 @@ export function AvailabilitySearch() {
 
       {notice && <p className="text-sm text-red-600">{notice}</p>}
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
         {shown.map((room) => {
           const availability =
             serverCounts[room.slug] !== undefined
@@ -127,8 +127,8 @@ export function AvailabilitySearch() {
               : roomsLeftForDates(room.slug, selection.checkIn, selection.checkOut);
           const isUnavailable = results ? !results.available.includes(room.slug) : false;
           return (
-            <div key={room.slug} className="flex flex-col gap-3">
-              <div className={isUnavailable ? "opacity-80" : ""}>
+            <div key={room.slug} className="flex flex-col gap-3 h-full">
+              <div className={`h-full flex-1 flex flex-col ${isUnavailable ? "opacity-80" : ""}`}>
                 <RoomCard
                   room={room}
                   availability={availability}
@@ -139,24 +139,15 @@ export function AvailabilitySearch() {
                 {availability === 0 || isUnavailable ? (
                   <div className="rounded-xl border border-red-200 bg-red-50/95 px-3 py-2 text-xs font-medium text-red-800 flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-red-600 shrink-0" />
-                    <span>Already Booked · Currently in service for these dates</span>
+                    <span>Already Booked for these dates</span>
                   </div>
-                ) : (
-                  <div className="flex items-center justify-between gap-2">
-                    <span
-                      className={`text-xs font-semibold ${
-                        availability <= 3 ? "text-amber-700" : "text-emerald-700"
-                      }`}
-                    >
-                      {availability} room{availability > 1 ? "s" : ""} available · In Service
-                    </span>
-                    {results && availability > 0 && (
-                      <Button size="sm" onClick={() => handleAdd(room.slug)}>
-                        {added === room.slug ? "Added to Cart ✓" : "Add to Cart"}
-                      </Button>
-                    )}
+                ) : results && availability > 0 ? (
+                  <div className="flex items-center justify-end gap-2">
+                    <Button size="sm" onClick={() => handleAdd(room.slug)}>
+                      {added === room.slug ? "Added to Cart ✓" : "Add to Cart"}
+                    </Button>
                   </div>
-                )}
+                ) : null}
               </div>
             </div>
           );

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "luxury rooms Rajapalayam",
     "banquet hall Rajapalayam",
     "swimming pool hotel Rajapalayam",
-    "Saffron Manor restaurant",
+    "Saffron restaurant",
   ],
   openGraph: {
     title: "Hotel Amil — 3-Star Luxury Hotel in Rajapalayam",

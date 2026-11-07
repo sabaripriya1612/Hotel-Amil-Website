@@ -14,7 +14,11 @@ export async function GET() {
       dbStatus = "Connected (PostgreSQL)";
       totalBookings = parseInt(res[0]?.count || "0", 10);
     } catch (e: any) {
-      dbStatus = `Connection Error: ${e.message || "Failed to query"}`;
+      console.error("[Health Check DB Error]:", e);
+      dbStatus =
+        process.env.NODE_ENV === "production"
+          ? "Connection Error: Database unavailable"
+          : `Connection Error: ${e.message || "Failed to query"}`;
     }
   }
 

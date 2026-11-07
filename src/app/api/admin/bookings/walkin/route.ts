@@ -6,9 +6,9 @@ import { getRoomBySlug } from "@/lib/rooms";
 import {
   verifyAdminAuth,
   sanitizeText,
-  isValidEmail,
   isValidPhone,
   validateBookingDates,
+  generateSecureId,
 } from "@/lib/security";
 
 /**
@@ -85,10 +85,7 @@ export async function POST(request: NextRequest) {
     }
     const pricing = pricingRes.pricing;
 
-    const bookingId = `AH-DESK-${new Date().getFullYear()}-${Math.random()
-      .toString(36)
-      .substring(2, 7)
-      .toUpperCase()}`;
+    const bookingId = generateSecureId(`AH-DESK-${new Date().getFullYear()}`, 3);
 
     const status = immediateCheckIn ? "checked_in" : "confirmed";
 

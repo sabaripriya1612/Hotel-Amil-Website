@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { siteConfig, hotelPolicies } from "@/lib/site";
 
@@ -30,30 +31,24 @@ const contactBlocks = [
 
 export default function ContactPage() {
   return (
-    <main className="bg-white text-stone-900">
-      <section className="bg-[#c0262d] pt-24 sm:pt-28 pb-10 sm:pb-12 text-white border-b border-red-900/30 shadow-inner">
-        <Container>
-          <p className="text-xs sm:text-sm font-bold tracking-[0.2em] text-gold-300 uppercase">Contact Us</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl text-white">
-            We would love to hear from you
-          </h1>
-          <p className="mt-4 max-w-2xl text-white/90">
-            Whether it is a room for tonight, a table for lunch or a grand celebration — our team
-            in Rajapalayam is ready to help.
-          </p>
-        </Container>
-      </section>
+    <main className="bg-[#FAF8F5] text-stone-900">
+      <PageHero
+        eyebrow="RESERVATIONS & HOSPITALITY"
+        title="We Would Love to Hear From You"
+        description="Whether it is a room for tonight, a table for lunch or a grand celebration — our reservations desk and concierge in Rajapalayam are ready to assist 24/7."
+        variant="contact"
+      />
 
-      <section className="py-14 bg-white">
+      <section className="py-16 sm:py-20">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1fr_420px]">
             <ContactForm />
 
             <aside className="space-y-5">
               {contactBlocks.map((block) => (
-                <div key={block.title} className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-                  <h3 className="font-display text-lg font-semibold text-stone-900">{block.title}</h3>
-                  <ul className="mt-3 space-y-2 text-sm">
+                <div key={block.title} className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-7 shadow-xs">
+                  <h3 className="font-display text-lg font-medium text-[#1C1917]">{block.title}</h3>
+                  <ul className="mt-3.5 space-y-2.5 text-sm font-sans">
                     {block.lines.map((line) => (
                       <li key={line.value} className="flex items-baseline gap-2">
                         <span className="w-14 shrink-0 text-xs uppercase tracking-wider text-stone-500">
@@ -61,7 +56,7 @@ export default function ContactPage() {
                         </span>
                         <a
                           href={`tel:${line.value.replace(/\s/g, "")}`}
-                          className="font-bold text-stone-900 hover:text-[#c0262d]"
+                          className="font-semibold text-stone-800 hover:text-[#382314] transition-colors"
                         >
                           {line.value}
                         </a>
@@ -71,10 +66,10 @@ export default function ContactPage() {
                 </div>
               ))}
 
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-                <h3 className="font-display text-lg font-semibold text-stone-900">Address</h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone-700">{siteConfig.address}</p>
-                <p className="mt-2 text-xs text-stone-500">
+              <div className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-7 shadow-xs">
+                <h3 className="font-display text-lg font-medium text-[#1C1917]">Address</h3>
+                <p className="mt-3 text-sm leading-relaxed text-stone-600 font-sans">{siteConfig.address}</p>
+                <p className="mt-2 text-xs text-stone-500 font-sans">
                   Check-in {hotelPolicies.checkInTime} · Check-out {hotelPolicies.checkOutTime} ·
                   Front desk open 24 hours · Free parking
                 </p>
@@ -82,7 +77,7 @@ export default function ContactPage() {
                   href={siteConfig.mapsDirections}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#c0262d] hover:underline"
+                  className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#382314] hover:underline"
                 >
                   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
                     <path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
@@ -91,9 +86,9 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 text-stone-900 shadow-sm">
-                <h3 className="font-display text-lg font-bold text-[#c0262d]">Good to know</h3>
-                <ul className="mt-3 space-y-2 text-sm text-stone-700">
+              <div className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-7 shadow-xs text-stone-900">
+                <h3 className="font-display text-lg font-medium text-[#1C1917]">Good to know</h3>
+                <ul className="mt-3 space-y-2 text-sm text-stone-600 font-sans">
                   <li>• {hotelPolicies.freeChildNote}</li>
                   <li>• Free cancellation up to 7 days before check-in</li>
                   <li>• Amil Cafe open 24/7 for coffee &amp; snacks</li>
@@ -104,19 +99,19 @@ export default function ContactPage() {
           </div>
 
           {/* Embedded Google Map of the hotel location */}
-          <div className="mt-8 overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-100 px-5 py-4 sm:px-6">
+          <div className="mt-12 overflow-hidden rounded-3xl border border-stone-200/80 bg-white shadow-xs">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-100 px-6 py-4">
               <div>
-                <p className="font-display text-lg font-semibold text-stone-900">
+                <p className="font-display text-lg font-medium text-[#1C1917]">
                   Find us on the map
                 </p>
-                <p className="mt-1 text-sm text-stone-500">{siteConfig.address}</p>
+                <p className="mt-0.5 text-xs text-stone-500 font-sans">{siteConfig.address}</p>
               </div>
               <a
                 href={siteConfig.mapsDirections}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-bold uppercase tracking-wider text-[#c0262d] hover:underline"
+                className="text-xs font-semibold uppercase tracking-wider text-[#382314] hover:underline"
               >
                 Get directions →
               </a>

@@ -17,7 +17,7 @@ export function ImagePlaceholder({
 
   if (src) {
     return (
-      <div className={cn("relative h-full w-full overflow-hidden bg-maroon-900", className)}>
+      <div className={cn("relative h-full w-full overflow-hidden bg-[#29180C]", className)}>
         <Image
           src={src}
           alt={alt ?? (label ?? "Hotel Amil, Rajapalayam")}
@@ -38,7 +38,7 @@ export function ImagePlaceholder({
     <div
       aria-hidden
       className={cn(
-        "flex h-full w-full items-center justify-center bg-gradient-to-br from-maroon-900 via-maroon-700 to-gold-500",
+        "flex h-full w-full items-center justify-center bg-gradient-to-br from-[#29180C] via-[#382314] to-[#D8A34F]",
         className
       )}
     >

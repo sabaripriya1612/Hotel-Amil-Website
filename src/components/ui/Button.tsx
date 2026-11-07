@@ -14,14 +14,14 @@ type ButtonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-xl font-bold uppercase tracking-wider transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c0262d] disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
+  "inline-flex items-center justify-center gap-2 rounded-xl font-semibold uppercase tracking-wider transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#382314] disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
 
 const variants = {
-  primary: "bg-[#c0262d] text-white hover:bg-[#a51d23] shadow-md hover:shadow-lg active:scale-95",
-  secondary: "bg-[#c0262d] text-white hover:bg-[#a51d23] shadow-md hover:shadow-lg active:scale-95",
+  primary: "bg-[#382314] text-white hover:bg-[#4A301D] shadow-sm hover:shadow-md active:scale-[0.98]",
+  secondary: "bg-[#D8A34F] text-[#382314] hover:bg-[#E7B765] shadow-sm hover:shadow-md active:scale-[0.98]",
   outline:
-    "border-2 border-[#c0262d] text-[#c0262d] hover:bg-[#c0262d] hover:text-white bg-white shadow-sm active:scale-95",
-  ghost: "text-[#c0262d] hover:bg-red-50",
+    "border border-stone-300 text-stone-800 hover:border-[#382314] hover:text-[#382314] bg-white shadow-xs active:scale-[0.98]",
+  ghost: "text-[#382314] hover:bg-[#F5EEE6]",
 };
 
 const sizes = {

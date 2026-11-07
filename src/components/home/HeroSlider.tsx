@@ -45,7 +45,7 @@ export function HeroSlider({
   };
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-gradient-to-b from-[#18060c] via-[#220911] to-[#120407]">
+    <div className="absolute inset-0 overflow-hidden bg-gradient-to-b from-[#140E0C] via-[#1E1614] to-[#100B09]">
       {slides.map((slide, i) => (
         <div
           key={slide.src}
@@ -112,7 +112,7 @@ export function HeroSlider({
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
                 i === current
-                  ? "w-6 bg-[#c0262d]"
+                  ? "w-6 bg-[#D8A34F]"
                   : "w-2 bg-white/60 hover:bg-white"
               )}
             />

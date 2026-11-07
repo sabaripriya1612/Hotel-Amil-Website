@@ -123,7 +123,7 @@ export function RoomImage360({
           sizes="(max-width: 1024px) 100vw, 60vw"
           className="object-cover"
         />
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-maroon-950/70 px-3 py-1 text-xs font-bold tracking-widest text-gold-300 backdrop-blur">
+        <span className="absolute left-4 top-4 z-10 rounded-full bg-[#382314]/85 px-3 py-1 text-xs font-semibold tracking-[0.2em] text-[#D8A34F] backdrop-blur border border-[#D8A34F]/30">
           360° VIEW
         </span>
         <button
@@ -132,8 +132,8 @@ export function RoomImage360({
           className="group absolute inset-0 z-10 flex items-end justify-center pb-6"
           aria-label={`Open 360 degree view of ${roomName}`}
         >
-          <span className="flex items-center gap-2 rounded-full bg-maroon-950/70 px-5 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur transition-transform group-hover:scale-105 group-hover:bg-maroon-900/80">
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+          <span className="flex items-center gap-2 rounded-full bg-[#382314]/90 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-xl backdrop-blur transition-all duration-300 group-hover:scale-105 group-hover:bg-[#4A301D] border border-[#D8A34F]/40">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#D8A34F]" fill="currentColor">
               <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm5.6 3.4c1.2 1.3 2 3 2.3 4.9l-3.2-1.6a7.2 7.2 0 0 0-3.7-3.3l.7-3.2a7.3 7.3 0 0 1 3.9 3.2zM12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z" />
             </svg>
             Drag to see the room in 360°
@@ -169,7 +169,7 @@ export function RoomImage360({
       {/* 360° viewer modal */}
       {open && (
         <div
-          className="fixed inset-0 z-[60] flex flex-col bg-maroon-950/95 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex flex-col bg-[#0F1715]/95 backdrop-blur-md"
           role="dialog"
           aria-modal="true"
           aria-label={`360 degree view of ${roomName}`}

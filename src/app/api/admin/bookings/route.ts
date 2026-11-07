@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { query, isDbConnected, initDatabase } from "@/lib/db";
+import { assignPhysicalRoomNumber, updateLocalBookingStatus } from "@/lib/inventory";
 import { verifyAdminAuth, sanitizeText } from "@/lib/security";
 
 /**
  * Admin Bookings Management API
  * GET: Retrieve bookings with filter and search
- * PATCH: Update booking status (e.g. check-in, check-out, cancel)
+ * PATCH: Update booking status or assign physical room number
  */
 
 export async function GET(request: NextRequest) {
@@ -44,6 +45,7 @@ export async function GET(request: NextRequest) {
           extra_person_total AS "extraPersonTotal",
           total_amount AS "totalAmount", 
           status, 
+          assigned_room_number AS "assignedRoomNumber",
           created_at AS "createdAt"
         FROM amil_bookings
         WHERE 1=1
@@ -89,41 +91,53 @@ export async function PATCH(request: NextRequest) {
     }
 
     const id = sanitizeText(body.id, 64);
-    const status = sanitizeText(body.status, 30);
-
-    const validStatuses = ["confirmed", "checked_in", "checked_out", "cancelled"];
-    if (!id || !validStatuses.includes(status)) {
-      return NextResponse.json(
-        { error: `Invalid status. Allowed values: ${validStatuses.join(", ")}` },
-        { status: 400 }
-      );
+    if (!id) {
+      return NextResponse.json({ error: "Reservation ID is required." }, { status: 400 });
     }
 
-    if (isDbConnected()) {
-      await initDatabase();
-      await query(
-        `UPDATE amil_bookings 
-         SET status = $1, updated_at = CURRENT_TIMESTAMP 
-         WHERE id = $2`,
-        [status, id]
-      );
+    const status = sanitizeText(body.status || "", 30);
+    const roomNumber = sanitizeText(body.roomNumber || body.assignedRoomNumber || "", 50);
 
-      return NextResponse.json({
-        success: true,
-        message: `Reservation ${id} updated to ${status}.`,
-        id,
-        status,
-      });
+    // Physical Room Assignment
+    if (roomNumber) {
+      const assignRes = await assignPhysicalRoomNumber(id, roomNumber);
+      if (!assignRes.success) {
+        return NextResponse.json({ error: assignRes.error }, { status: 409 });
+      }
+    }
+
+    // Status Update
+    if (status) {
+      const validStatuses = ["confirmed", "checked_in", "checked_out", "cancelled"];
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json(
+          { error: `Invalid status. Allowed values: ${validStatuses.join(", ")}` },
+          { status: 400 }
+        );
+      }
+
+      if (isDbConnected()) {
+        await initDatabase();
+        await query(
+          `UPDATE amil_bookings 
+           SET status = $1, updated_at = CURRENT_TIMESTAMP 
+           WHERE id = $2`,
+          [status, id]
+        );
+      } else {
+        updateLocalBookingStatus(id, status, roomNumber || undefined);
+      }
     }
 
     return NextResponse.json({
       success: true,
-      message: `Reservation ${id} status updated to ${status} (memory mode).`,
+      message: `Reservation ${id} updated successfully.`,
       id,
-      status,
+      status: status || undefined,
+      assignedRoomNumber: roomNumber || undefined,
     });
   } catch (err) {
     console.error("[Admin PATCH /api/admin/bookings Error]:", err);
-    return NextResponse.json({ error: "Failed to update reservation status." }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update reservation." }, { status: 500 });
   }
 }

@@ -139,3 +139,7 @@ export function clearCart() {
 export function cartCount(): number {
   return getCart().length;
 }
+
+export function getCartCountServerSnapshot(): number {
+  return 0;
+}

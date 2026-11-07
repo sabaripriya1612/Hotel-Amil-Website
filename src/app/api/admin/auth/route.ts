@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { timingSafeEqual, verifyAdminAuth, sanitizeText } from "@/lib/security";
+import {
+  timingSafeEqual,
+  verifyAdminAuth,
+  sanitizeText,
+  checkRateLimit,
+  createAdminSessionToken,
+} from "@/lib/security";
 
 /**
  * Staff & Admin Authentication API
@@ -16,6 +22,17 @@ function getAdminSecret(): string {
 
 export async function POST(request: NextRequest) {
   try {
+    // 1. Rate Limiting to prevent brute-force attacks on staff credentials
+    const ip = request.headers.get("x-forwarded-for") || "127.0.0.1";
+    const rateCheck = checkRateLimit(`admin-login:${ip}`, 5, 60000);
+    if (!rateCheck.allowed) {
+      console.warn(`[Security Alert]: Brute-force rate limit exceeded for admin login from IP ${ip}`);
+      return NextResponse.json(
+        { error: "Too many failed login attempts. Please wait 60 seconds before trying again." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json({ error: "Invalid request payload." }, { status: 400 });
@@ -30,11 +47,15 @@ export async function POST(request: NextRequest) {
 
     // Verify key with constant-time equality
     if (!timingSafeEqual(key.trim(), expectedSecret)) {
+      console.warn(`[Security Alert]: Failed admin authentication attempt from IP ${ip}`);
       return NextResponse.json(
         { error: "Invalid staff credentials. Access denied." },
         { status: 401 }
       );
     }
+
+    // Generate cryptographically signed session token (does NOT expose raw secret in cookie)
+    const sessionToken = createAdminSessionToken();
 
     // Create response with secure httpOnly cookie
     const response = NextResponse.json({
@@ -48,7 +69,7 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set({
       name: SESSION_COOKIE_NAME,
-      value: expectedSecret,
+      value: sessionToken,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",

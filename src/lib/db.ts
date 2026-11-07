@@ -13,24 +13,40 @@ const connectionString =
   process.env.POSTGRES_URL ||
   "";
 
-let pool: Pool | null = null;
+declare global {
+  var _amilPgPool: Pool | undefined;
+}
 
-if (connectionString) {
+let pool: Pool | null = global._amilPgPool || null;
+
+if (!pool && connectionString) {
   try {
+    const isLocalhost =
+      connectionString.includes("localhost") ||
+      connectionString.includes("127.0.0.1");
+
+    // Enforce valid TLS certificate validation by default for cloud databases.
+    // Never allow rejectUnauthorized: false in production unless explicitly opted in via DB_SSL_NO_VERIFY.
+    const sslConfig = isLocalhost
+      ? undefined
+      : process.env.DB_SSL_NO_VERIFY === "true"
+      ? { rejectUnauthorized: false }
+      : { rejectUnauthorized: true };
+
     pool = new Pool({
       connectionString,
-      ssl:
-        process.env.NODE_ENV === "production" && !connectionString.includes("localhost")
-          ? { rejectUnauthorized: false }
-          : undefined,
-      max: 10,
-      idleTimeoutMillis: 30000,
+      ssl: sslConfig,
+      max: process.env.NODE_ENV === "production" ? 10 : 5,
+      idleTimeoutMillis: 20000,
       connectionTimeoutMillis: 5000,
     });
 
     pool.on("error", (err) => {
       console.error("[PostgreSQL Pool Error]: Unexpected error on idle client", err);
     });
+
+    // Cache pool instance globally to reuse connections across serverless warm invocations
+    global._amilPgPool = pool;
   } catch (err) {
     console.error("[PostgreSQL Init Error]: Failed to create pool", err);
     pool = null;
@@ -82,12 +98,17 @@ export async function initDatabase(): Promise<boolean> {
         extra_person_total NUMERIC(10,2) DEFAULT 0,
         total_amount NUMERIC(10,2) NOT NULL,
         status VARCHAR(50) DEFAULT 'confirmed',
+        assigned_room_number VARCHAR(50),
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
     // Indexes for fast lookup & conflict detection
+    await client.query(`
+      ALTER TABLE amil_bookings 
+      ADD COLUMN IF NOT EXISTS assigned_room_number VARCHAR(50);
+    `);
     await client.query(`
       CREATE INDEX IF NOT EXISTS idx_amil_bookings_room_dates 
       ON amil_bookings (room_slug, check_in, check_out);

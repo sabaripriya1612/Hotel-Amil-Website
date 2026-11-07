@@ -51,17 +51,17 @@ export function GoogleReviews() {
   };
 
   return (
-    <section className="bg-white py-10 lg:py-14">
+    <section className="bg-[#FAF8F5] py-16 sm:py-20 border-t border-stone-200/80">
       <Container>
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)] lg:gap-14">
           {/* Rating summary */}
           <div>
-            <p className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">GOOD</p>
+            <p className="font-display text-4xl font-normal tracking-tight text-[#1C1917] sm:text-5xl">EXCELLENT</p>
             <div className="mt-4">
-              <RatingStars value={4} size={40} />
+              <RatingStars value={4} size={36} />
             </div>
-            <p className="mt-5 text-lg text-ink/80">
-              Based on <span className="font-bold text-ink">2,828</span> reviews
+            <p className="mt-4 text-base text-stone-600 font-sans">
+              Based on <span className="font-bold text-[#1C1917]">2,828+</span> verified guest reviews
             </p>
             <Image
               src="/images/google-logo.png"
@@ -81,15 +81,15 @@ export function GoogleReviews() {
               {reviews.map((review) => (
                 <article
                   key={review.id}
-                  className="w-[300px] shrink-0 snap-start rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:w-[320px]"
+                  className="w-[300px] shrink-0 snap-start rounded-2xl border border-stone-200/80 bg-white p-5 sm:p-6 shadow-xs transition-all duration-300 hover:border-[#382314]/30 hover:shadow-md sm:w-[320px]"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c0262d] text-sm font-bold text-white">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#382314] text-sm font-semibold text-white">
                       {review.name.charAt(0)}
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-bold text-stone-900">{review.name}</p>
-                      <p className="text-xs text-stone-500">{review.date}</p>
+                      <p className="truncate text-sm font-semibold text-stone-900">{review.name}</p>
+                      <p className="text-xs text-stone-500 font-sans">{review.date}</p>
                     </div>
                     <Image
                       src="/images/google-g.png"
@@ -103,7 +103,7 @@ export function GoogleReviews() {
                     <RatingStars value={review.rating} size={16} />
                     <VerifiedBadge />
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-stone-700">{review.comment}</p>
+                  <p className="mt-3.5 text-sm leading-relaxed text-stone-600 font-sans">{review.comment}</p>
                 </article>
               ))}
             </div>
@@ -111,11 +111,11 @@ export function GoogleReviews() {
               type="button"
               onClick={scrollNext}
               aria-label="Show next reviews"
-              className="absolute -right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-[#c0262d] text-white shadow-lg transition-all hover:scale-105 hover:bg-[#a51d23] cursor-pointer"
+              className="absolute -right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-[#382314] text-white shadow-md transition-all hover:scale-105 hover:bg-[#4A301D] cursor-pointer border border-white/20"
             >
               <svg
                 viewBox="0 0 24 24"
-                className="h-5 w-5"
+                className="h-5 w-5 text-[#D8A34F]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.2"

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getRoomAvailability, getAllRoomsAvailability } from "@/lib/inventory";
+import { getRoomAvailability, getAllRoomsAvailability, getMonthCalendarAvailability } from "@/lib/inventory";
 import { validateBookingDates, checkRateLimit, sanitizeText } from "@/lib/security";
 
 export async function GET(request: NextRequest) {
@@ -14,14 +14,34 @@ export async function GET(request: NextRequest) {
     }
 
     const { searchParams } = new URL(request.url);
+    const roomSlug = sanitizeText(searchParams.get("roomSlug") || "", 100);
+    const monthParam = sanitizeText(searchParams.get("month") || "", 7); // e.g. 2026-11
+
+    // Monthly Calendar Inventory Mode
+    if (monthParam && roomSlug) {
+      const parts = monthParam.split("-").map(Number);
+      if (parts.length === 2 && parts[0] >= 2024 && parts[1] >= 1 && parts[1] <= 12) {
+        const cal = await getMonthCalendarAvailability(roomSlug, parts[0], parts[1]);
+        if (!cal) {
+          return NextResponse.json({ error: "Room category not found." }, { status: 404 });
+        }
+        return NextResponse.json({
+          roomSlug,
+          year: parts[0],
+          month: parts[1],
+          totalRooms: cal.room.totalRooms,
+          days: cal.days,
+        });
+      }
+    }
+
     const checkIn = sanitizeText(searchParams.get("checkIn") || "", 12);
     const checkOut = sanitizeText(searchParams.get("checkOut") || "", 12);
-    const roomSlug = sanitizeText(searchParams.get("roomSlug") || "", 100);
 
-    // If no dates provided, return general guidance or default
+    // If no dates provided, return error
     if (!checkIn || !checkOut) {
       return NextResponse.json(
-        { error: "Both checkIn and checkOut dates (YYYY-MM-DD) are required." },
+        { error: "Both checkIn and checkOut dates (YYYY-MM-DD), or roomSlug and month (YYYY-MM) are required." },
         { status: 400 }
       );
     }

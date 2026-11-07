@@ -11,6 +11,7 @@ import {
 } from "@/lib/cart";
 import { createBookingAsync, formatCurrency } from "@/lib/booking";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 
 declare global {
@@ -227,19 +228,20 @@ export default function CheckoutPage() {
   };
 
   const fieldCls =
-    "w-full rounded-xl border border-maroon-800/15 bg-white px-4 py-3 text-sm text-maroon-900 outline-none transition-colors focus:border-gold-500";
+    "w-full rounded-xl border border-stone-200/90 bg-stone-50/80 hover:bg-white focus:bg-white px-4 py-3 text-sm text-stone-900 outline-none transition-all focus:border-[#382314] focus:ring-1 focus:ring-[#382314]/20 font-medium";
 
   if (items.length === 0) {
     return (
-      <main className="bg-white text-stone-900">
-        <section className="bg-[#c0262d] pt-24 sm:pt-28 pb-10 sm:pb-12 text-white border-b border-red-900/30 shadow-inner">
-          <Container>
-            <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl text-white">Guest details</h1>
-          </Container>
-        </section>
-        <section className="bg-white py-14">
+      <main className="bg-[#FAF8F5] text-stone-900">
+        <PageHero
+          eyebrow="RESERVATION"
+          title="Guest Details"
+          description="Your booking cart is currently empty. Please select a room to proceed with your reservation."
+          variant="booking"
+        />
+        <section className="py-16">
           <Container className="text-center">
-            <p className="text-lg text-stone-600">Nothing to check out — your cart is empty.</p>
+            <p className="text-lg text-stone-600 font-sans">Nothing to check out — your cart is empty.</p>
             <div className="mt-8 flex justify-center">
               <Button href="/rooms">Browse Rooms</Button>
             </div>
@@ -250,23 +252,18 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="bg-white text-stone-900">
-      <section className="bg-[#c0262d] pt-24 sm:pt-28 pb-10 sm:pb-12 text-white border-b border-red-900/30 shadow-inner">
-        <Container>
-          <p className="text-xs sm:text-sm font-bold tracking-[0.2em] text-gold-300 uppercase">Booking</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold sm:text-5xl text-white">
-            Guest details &amp; payment
-          </h1>
-          <p className="mt-3 max-w-2xl text-white/90">
-            Complete these details and we will hold your room on arrival.
-          </p>
-        </Container>
-      </section>
-      <section className="bg-white py-14">
+    <main className="bg-[#FAF8F5] text-stone-900">
+      <PageHero
+        eyebrow="RESERVATION"
+        title="Guest Details & Payment"
+        description="Complete these details and we will hold your room on arrival with instant confirmation."
+        variant="booking"
+      />
+      <section className="py-14 sm:py-16">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
           <form
-            className="space-y-6 rounded-2xl border border-maroon-100 bg-white p-6 shadow-sm"
+            className="space-y-6 rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-8 shadow-xs"
             onSubmit={(e) => {
               e.preventDefault();
               placeBooking();
@@ -274,7 +271,7 @@ export default function CheckoutPage() {
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
-                <label className="mb-1.5 block text-sm font-medium text-maroon-900">Full name *</label>
+                <label className="mb-1.5 block text-sm font-medium text-stone-700">Full name *</label>
                 <input
                   className={fieldCls}
                   value={form.name}
@@ -284,7 +281,7 @@ export default function CheckoutPage() {
                 {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-maroon-900">Email *</label>
+                <label className="mb-1.5 block text-sm font-medium text-stone-700">Email *</label>
                 <input
                   type="email"
                   className={fieldCls}
@@ -295,7 +292,7 @@ export default function CheckoutPage() {
                 {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-maroon-900">Mobile number *</label>
+                <label className="mb-1.5 block text-sm font-medium text-stone-700">Mobile number *</label>
                 <input
                   type="tel"
                   className={fieldCls}
@@ -306,7 +303,7 @@ export default function CheckoutPage() {
                 {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
               </div>
               <div className="sm:col-span-2">
-                <label className="mb-1.5 block text-sm font-medium text-maroon-900">Special requests (optional)</label>
+                <label className="mb-1.5 block text-sm font-medium text-stone-700">Special requests (optional)</label>
                 <textarea
                   className={`${fieldCls} min-h-24 resize-y`}
                   value={form.specialRequests}
@@ -317,9 +314,9 @@ export default function CheckoutPage() {
             </div>
 
             <div>
-              <p className="mb-2 text-sm font-medium text-maroon-900">How would you like to pay?</p>
+              <p className="mb-2 text-sm font-medium text-stone-700">How would you like to pay?</p>
               <div className="grid gap-3 sm:grid-cols-2">
-{(
+                {(
                   [
                     {
                       value: "pay_at_hotel",
@@ -339,21 +336,21 @@ export default function CheckoutPage() {
                     key={opt.value}
                     type="button"
                     onClick={() => set("paymentMethod", opt.value)}
-                    className={`rounded-xl border-2 p-4 text-left transition-all ${
+                    className={`rounded-xl border p-4 text-left transition-all cursor-pointer ${
                       form.paymentMethod === opt.value
-                        ? "border-gold-500 bg-gold-400/10 shadow-sm"
-                        : "border-maroon-100 hover:border-maroon-300"
+                        ? "border-[#382314] bg-[#382314]/5 shadow-xs"
+                        : "border-stone-200/90 hover:border-stone-300"
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-maroon-900">{opt.label}</span>
+                      <span className="font-semibold text-stone-900">{opt.label}</span>
                       {opt.badge && (
-                        <span className="rounded-full bg-gold-400 px-2 py-0.5 text-[10px] font-bold uppercase text-maroon-950">
+                        <span className="rounded-full bg-[#382314] px-2 py-0.5 text-[10px] font-semibold uppercase text-white">
                           {opt.badge}
                         </span>
                       )}
                     </div>
-                    <p className="mt-1 text-xs text-muted">{opt.desc}</p>
+                    <p className="mt-1 text-xs text-stone-500 font-sans">{opt.desc}</p>
                   </button>
                 ))}
               </div>
@@ -372,39 +369,39 @@ export default function CheckoutPage() {
                 ? `Pay Online Now · ${formatCurrency(total)}`
                 : `Confirm Booking · ${formatCurrency(total)}`}
             </Button>
-            <p className="text-center text-xs text-muted">
+            <p className="text-center text-xs text-stone-500 font-sans">
               Reservations are instantly registered and confirmed. Choose UPI/Card for fast confirmation or pay at front desk on arrival.
             </p>
           </form>
 
-          <aside className="h-fit rounded-2xl border border-maroon-100 bg-white p-6 shadow-sm lg:sticky lg:top-24">
-            <h2 className="font-display text-xl font-semibold text-maroon-900">Your stay</h2>
-            <ul className="mt-4 space-y-4">
+          <aside className="h-fit rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-7 shadow-xs lg:sticky lg:top-24">
+            <h2 className="font-display text-xl font-medium text-[#1C1917]">Your stay</h2>
+            <ul className="mt-4 space-y-4 font-sans">
               {items.map((item) => (
-                <li key={item.id} className="border-b border-maroon-100 pb-3 text-sm">
-                  <p className="font-semibold text-maroon-900">{item.roomName}</p>
-                  <p className="text-muted">
+                <li key={item.id} className="border-b border-stone-100 pb-3 text-sm">
+                  <p className="font-semibold text-stone-900">{item.roomName}</p>
+                  <p className="text-stone-500">
                     {item.nights} night{item.nights > 1 ? "s" : ""} · {item.adults} adult{item.adults > 1 ? "s" : ""}
                     {item.children > 0 && `, ${item.children} child${item.children > 1 ? "ren" : ""}`}
                   </p>
                   <div className="mt-1 flex justify-between">
-                    <span className="text-muted">Room + extras</span>
-                    <span className="font-semibold text-maroon-900">{formatCurrency(item.total)}</span>
+                    <span className="text-stone-500">Room + extras</span>
+                    <span className="font-semibold text-stone-900">{formatCurrency(item.total)}</span>
                   </div>
                 </li>
               ))}
             </ul>
-            <dl className="mt-4 space-y-2 text-sm">
+            <dl className="mt-4 space-y-2 text-sm font-sans">
               <div className="flex justify-between">
-                <dt className="text-muted">GST</dt>
-                <dd className="font-medium text-maroon-900">Included ({formatCurrency(gstVisible)})</dd>
+                <dt className="text-stone-500">GST</dt>
+                <dd className="font-medium text-stone-900">Included ({formatCurrency(gstVisible)})</dd>
               </div>
-              <div className="flex justify-between border-t border-maroon-100 pt-3 text-base">
-                <dt className="font-semibold text-maroon-900">Total</dt>
-                <dd className="font-bold text-gold-600">{formatCurrency(total)}</dd>
+              <div className="flex justify-between border-t border-stone-100 pt-3 text-base">
+                <dt className="font-semibold text-stone-900">Total</dt>
+                <dd className="font-bold text-[#382314]">{formatCurrency(total)}</dd>
               </div>
             </dl>
-            <Link href="/cart" className="mt-4 block text-center text-sm text-gold-600 hover:underline">
+            <Link href="/cart" className="mt-4 block text-center text-sm font-medium text-[#382314] hover:underline">
               ← Back to cart
             </Link>
           </aside>

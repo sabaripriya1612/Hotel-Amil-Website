@@ -76,20 +76,20 @@ export function ContactForm() {
   };
 
   const fieldCls =
-    "w-full rounded-xl border border-maroon-800/15 bg-white px-4 py-3 text-sm text-maroon-900 outline-none transition-colors focus:border-gold-500";
+    "w-full rounded-xl border border-stone-200/90 bg-stone-50/80 hover:bg-white focus:bg-white px-4 py-3 text-sm text-stone-900 outline-none transition-all focus:border-[#382314] focus:ring-1 focus:ring-[#382314]/20 font-medium";
 
   if (sent) {
     return (
-      <div className="rounded-2xl border border-maroon-100 bg-white p-8 text-center shadow-sm">
+      <div className="rounded-2xl border border-stone-200/80 bg-white p-8 text-center shadow-xs">
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
           <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <h2 className="mt-4 font-display text-2xl font-semibold text-maroon-900">
+        <h2 className="mt-4 font-display text-2xl font-medium text-[#1C1917]">
           Message Received &amp; Saved
         </h2>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mt-2 text-sm text-stone-600 font-sans">
           Your inquiry has been safely recorded in our hotel database. Our front desk concierge will
           get back to you on {form.phone} shortly.
         </p>
@@ -111,7 +111,7 @@ export function ContactForm() {
           </Button>
           <a
             href={`tel:${siteConfig.phones[0].replace(/\s/g, "")}`}
-            className="rounded-full bg-maroon-800 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-maroon-900 inline-flex items-center"
+            className="rounded-full bg-[#382314] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#4A301D] inline-flex items-center shadow-xs"
           >
             Call Front Desk
           </a>
@@ -122,15 +122,15 @@ export function ContactForm() {
 
   return (
     <form
-      className="rounded-2xl border border-maroon-100 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-8 shadow-xs"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(true);
       }}
     >
-      <h2 className="font-display text-2xl font-semibold text-maroon-900">Send us a message</h2>
-      <p className="mt-2 text-sm text-muted">
-        Fill out this form to record your inquiry directly with Hotel Amil's reservations desk.
+      <h2 className="font-display text-2xl font-medium text-[#1C1917]">Send us a message</h2>
+      <p className="mt-2 text-sm text-stone-600 font-sans">
+        Fill out this form to record your inquiry directly with Hotel Amil&apos;s reservations desk.
       </p>
 
       {apiError && (
@@ -141,7 +141,7 @@ export function ContactForm() {
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-maroon-900">Name *</label>
+          <label className="mb-1.5 block text-sm font-medium text-stone-700">Name *</label>
           <input
             className={fieldCls}
             value={form.name}
@@ -152,7 +152,7 @@ export function ContactForm() {
           {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-maroon-900">Phone *</label>
+          <label className="mb-1.5 block text-sm font-medium text-stone-700">Phone *</label>
           <input
             className={fieldCls}
             value={form.phone}
@@ -163,7 +163,7 @@ export function ContactForm() {
           {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
         </div>
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-sm font-medium text-maroon-900">
+          <label className="mb-1.5 block text-sm font-medium text-stone-700">
             Email (optional)
           </label>
           <input
@@ -175,7 +175,7 @@ export function ContactForm() {
           />
         </div>
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-sm font-medium text-maroon-900">Subject</label>
+          <label className="mb-1.5 block text-sm font-medium text-stone-700">Subject</label>
           <select
             className={fieldCls}
             value={form.subject}
@@ -197,7 +197,7 @@ export function ContactForm() {
           </select>
         </div>
         <div className="sm:col-span-2">
-          <label className="mb-1.5 block text-sm font-medium text-maroon-900">Message *</label>
+          <label className="mb-1.5 block text-sm font-medium text-stone-700">Message *</label>
           <textarea
             className={`${fieldCls} min-h-32 resize-y`}
             value={form.message}

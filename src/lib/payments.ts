@@ -124,8 +124,12 @@ export function verifyPaymentSignature(
 ): boolean {
   if (!orderId || !paymentId || !signature) return false;
 
-  // Allow mock payment verification in simulation mode
+  // Simulation mode is strictly blocked in production
   if (orderId.startsWith("order_sim_")) {
+    if (process.env.NODE_ENV === "production") {
+      console.warn("[Security Alert]: Simulation payment order rejected in production environment.");
+      return false;
+    }
     return signature.startsWith("sig_sim_") || signature.length >= 10;
   }
 

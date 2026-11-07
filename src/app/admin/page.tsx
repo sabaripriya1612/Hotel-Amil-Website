@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { rooms } from "@/lib/rooms";
 import { todayISO, addDaysISO, formatCurrency } from "@/lib/format";
@@ -78,23 +78,7 @@ export default function AdminDashboardPage() {
   });
   const [blockLoading, setBlockLoading] = useState(false);
 
-  // 1. Verify Auth on mount
-  useEffect(() => {
-    fetch("/api/admin/auth")
-      .then((res) => {
-        if (!res.ok) {
-          router.push("/admin/login");
-        } else {
-          setAuthChecked(true);
-          loadDashboardData();
-        }
-      })
-      .catch(() => {
-        router.push("/admin/login");
-      });
-  }, [router]);
-
-  const loadDashboardData = async () => {
+  const loadDashboardData = useCallback(async () => {
     setLoading(true);
     try {
       const [resBookings, resBlocks] = await Promise.all([
@@ -115,7 +99,23 @@ export default function AdminDashboardPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  // 1. Verify Auth on mount
+  useEffect(() => {
+    fetch("/api/admin/auth")
+      .then((res) => {
+        if (!res.ok) {
+          router.push("/admin/login");
+        } else {
+          setAuthChecked(true);
+          loadDashboardData();
+        }
+      })
+      .catch(() => {
+        router.push("/admin/login");
+      });
+  }, [router, loadDashboardData]);
 
   const handleLogout = async () => {
     await fetch("/api/admin/auth", { method: "DELETE" });

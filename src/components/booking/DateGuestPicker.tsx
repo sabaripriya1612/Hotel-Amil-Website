@@ -186,10 +186,24 @@ export function DateGuestPicker({
             <button
               type="button"
               onClick={handleSearch}
-              className="w-full sm:w-auto h-11 sm:h-12 px-6 rounded-xl bg-[#c0262d] hover:bg-[#a51d23] active:scale-[0.98] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              className="group relative w-full sm:w-auto h-11 sm:h-12 px-7 inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-display text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] text-[#F0DCBE] hover:text-[#FFF6E9] transition-all duration-300 ease-out cursor-pointer select-none active:scale-97 border-[1.5px] border-[#D4A346] hover:border-[#E8B85A] shadow-[0_2px_8px_rgba(20,10,5,0.3),inset_0_1px_1px_rgba(255,235,180,0.18)] hover:shadow-[0_4px_14px_rgba(30,16,8,0.45),inset_0_1px_1.5px_rgba(255,235,180,0.28)]"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 25%, #3E2716 0%, #25160C 65%, #150B05 100%)",
+              }}
             >
+              <svg
+                viewBox="0 0 24 24"
+                className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 fill-[#D4A346] transition-transform duration-300 group-hover:scale-105 group-hover:fill-[#E8B85A]"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm14 6H4v12h16V8zm-13 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"
+                />
+              </svg>
               <span>CHECK RATES</span>
-              <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
@@ -199,15 +213,15 @@ export function DateGuestPicker({
   }
 
   const inputCls = compact
-    ? "w-full rounded-xl border border-stone-300 bg-white px-2.5 py-1 text-xs text-stone-900 outline-none transition-colors focus:border-[#c0262d] font-medium h-[34px]"
-    : "w-full rounded-xl border border-stone-300 bg-white px-4 py-2.5 text-sm text-stone-900 outline-none transition-colors focus:border-[#c0262d]";
+    ? "w-full rounded-xl border border-stone-200/90 bg-[#F5F2EB]/80 hover:bg-white focus:bg-white px-2.5 py-1 text-xs text-stone-900 outline-none transition-all focus:border-[#382314] focus:ring-1 focus:ring-[#382314]/20 font-medium h-[36px]"
+    : "w-full rounded-xl border border-stone-200/90 bg-[#F5F2EB]/80 hover:bg-white focus:bg-white px-4 py-2.5 text-sm text-stone-900 outline-none transition-all focus:border-[#382314] focus:ring-1 focus:ring-[#382314]/20";
 
   const labelCls = compact
-    ? "mb-1 block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#c0262d]"
-    : "mb-1 block text-xs font-bold uppercase tracking-wider text-[#c0262d]";
+    ? "mb-1 block text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.15em] text-stone-700"
+    : "mb-1.5 block text-xs font-semibold uppercase tracking-[0.15em] text-stone-700";
 
   return (
-    <div className={compact ? "" : "rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"}>
+    <div className={compact ? "" : "rounded-2xl border border-stone-200/90 bg-[#FAF7F2] p-6 shadow-xs"}>
       {/* Compact mode: 2 cols on mobile, 4 on tablet, 5-col single row on desktop */}
       <div
         className={
@@ -280,11 +294,26 @@ export function DateGuestPicker({
             onClick={handleSearch}
             className={
               compact
-                ? "w-full h-[34px] rounded-xl bg-[#c0262d] hover:bg-[#a51d23] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider transition-all shadow cursor-pointer flex items-center justify-center px-4"
-                : "w-full rounded-xl bg-[#c0262d] hover:bg-[#a51d23] active:scale-[0.98] text-white font-bold py-2.5 text-sm uppercase tracking-wider transition-all shadow cursor-pointer flex items-center justify-center"
+                ? "group relative w-full h-[36px] inline-flex items-center justify-center gap-1.5 sm:gap-2 overflow-hidden rounded-full px-3 font-display text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[#F0DCBE] hover:text-[#FFF6E9] transition-all duration-300 ease-out cursor-pointer select-none active:scale-97 border-[1.5px] border-[#D4A346] hover:border-[#E8B85A] shadow-[0_2px_8px_rgba(20,10,5,0.3),inset_0_1px_1px_rgba(255,235,180,0.18)] hover:shadow-[0_4px_14px_rgba(30,16,8,0.45),inset_0_1px_1.5px_rgba(255,235,180,0.28)]"
+                : "group relative w-full h-[42px] inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-4 font-display text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] text-[#F0DCBE] hover:text-[#FFF6E9] transition-all duration-300 ease-out cursor-pointer select-none active:scale-97 border-[1.5px] border-[#D4A346] hover:border-[#E8B85A] shadow-[0_2px_8px_rgba(20,10,5,0.3),inset_0_1px_1px_rgba(255,235,180,0.18)] hover:shadow-[0_4px_14px_rgba(30,16,8,0.45),inset_0_1px_1.5px_rgba(255,235,180,0.28)]"
             }
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 25%, #3E2716 0%, #25160C 65%, #150B05 100%)",
+            }}
           >
-            <span>Check Availability</span>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-3.5 w-3.5 shrink-0 fill-[#D4A346] transition-transform duration-300 group-hover:scale-105 group-hover:fill-[#E8B85A]"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v14a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm14 6H4v12h16V8zm-13 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm-8 4h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"
+              />
+            </svg>
+            <span className="truncate">CHECK AVAILABILITY</span>
           </button>
         </div>
       </div>

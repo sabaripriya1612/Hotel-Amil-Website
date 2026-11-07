@@ -59,6 +59,9 @@ export const imageCatalog: Record<string, string> = {
   "Exclusivesingle360-room": "/images/360/Executivesingle360-room.png",
   "Executivesingle360-room": "/images/360/Executivesingle360-room.png",
   "deluxe360-room": "/images/360/deluxe360-room.png",
+  "Executivedouble360-room": "/images/360/Executivedouble360-room.png",
+  "executivedouble360-room": "/images/360/Executivedouble360-room.png",
+  "executive-double-360": "/images/360/Executivedouble360-room.png",
 
   // Room Amenities & Details
   "room-bathroom": "/images/bath1.jpeg",
@@ -153,7 +156,7 @@ export const photoSlides = [
   },
   {
     src: "/images/reest.png",
-    alt: "Saffron Manor Multi-Cuisine Fine Dining Restaurant",
+    alt: "Saffron Restaurant Multi-Cuisine Fine Dining",
     title: "Exquisite Culinary Delights",
     subtitle: "Authentic Chettinad, North Indian, Tandoori & Continental cuisine",
   },
@@ -199,7 +202,6 @@ export const facilitySlides: Record<string, string[]> = {
   "amil-cafe": [
     "/images/cafe.png",
     "/images/cafe bathroom.jpeg",
-    "/images/cafe.png",
   ],
   "kings-bar": [
     "/images/bar1.png",

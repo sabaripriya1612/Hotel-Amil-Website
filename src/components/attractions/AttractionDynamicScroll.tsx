@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type AttractionDynamicScrollProps = {
@@ -14,8 +13,6 @@ type AttractionDynamicScrollProps = {
 export function AttractionDynamicScroll({
   name,
   images,
-  categoryLabel,
-  distance,
 }: AttractionDynamicScrollProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -110,7 +107,7 @@ export function AttractionDynamicScroll({
     <div className="flex flex-col space-y-3">
       {/* Main Dynamic Scroll Viewer Frame */}
       <div
-        className="group relative h-[380px] sm:h-[440px] md:h-[480px] w-full overflow-hidden rounded-2xl border border-maroon-900/30 bg-gradient-to-b from-[#1a080d] via-[#240b12] to-[#120407] shadow-xl"
+        className="group relative h-[380px] sm:h-[440px] md:h-[480px] w-full overflow-hidden rounded-2xl border border-stone-800/40 bg-gradient-to-b from-[#121E1C] via-[#29180C] to-[#0F1715] shadow-xl"
         onMouseEnter={() => setIsPlaying(false)}
         onMouseLeave={() => setIsPlaying(true)}
         onTouchStart={handleTouchStart}
@@ -125,7 +122,7 @@ export function AttractionDynamicScroll({
         />
 
         {/* Subtle Decorative Golden Border Accent */}
-        <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold-400/20 z-20" />
+        <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#D8A34F]/20 z-20" />
 
         {/* Active Image (Preserves natural aspect ratio with object-contain - NO ZOOM!) */}
         <div className="relative z-10 flex h-full w-full items-center justify-center p-3 sm:p-5">
@@ -149,7 +146,7 @@ export function AttractionDynamicScroll({
                 resetTimer();
               }}
               aria-label="Previous photo"
-              className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-maroon-950/70 text-white backdrop-blur-md border border-gold-400/30 transition-all duration-200 hover:scale-110 hover:bg-maroon-900 hover:border-gold-400"
+              className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#29180C]/80 text-white backdrop-blur-md border border-[#D8A34F]/30 transition-all duration-200 hover:scale-105 hover:bg-[#382314] hover:border-[#D8A34F]"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
@@ -163,7 +160,7 @@ export function AttractionDynamicScroll({
                 resetTimer();
               }}
               aria-label="Next photo"
-              className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-maroon-950/70 text-white backdrop-blur-md border border-gold-400/30 transition-all duration-200 hover:scale-110 hover:bg-maroon-900 hover:border-gold-400"
+              className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#29180C]/80 text-white backdrop-blur-md border border-[#D8A34F]/30 transition-all duration-200 hover:scale-105 hover:bg-[#382314] hover:border-[#D8A34F]"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
@@ -216,7 +213,7 @@ export function AttractionDynamicScroll({
             type="button"
             onClick={closeLightbox}
             aria-label="Close fullscreen view"
-            className="absolute top-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-gold-500 hover:text-maroon-950"
+            className="absolute top-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-[#382314] hover:text-white"
           >
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
@@ -225,7 +222,7 @@ export function AttractionDynamicScroll({
 
           {/* Lightbox Caption */}
           <div className="absolute top-5 left-5 z-50 flex items-center gap-3 text-white">
-            <span className="rounded-full bg-maroon-950 px-3.5 py-1 text-xs font-semibold text-gold-300 border border-gold-500/30">
+            <span className="rounded-full bg-[#29180C] px-3.5 py-1 text-xs font-semibold text-[#D8A34F] border border-[#D8A34F]/30">
               {name}
             </span>
             <span className="text-xs text-white/70">
@@ -255,7 +252,7 @@ export function AttractionDynamicScroll({
                     )
                   }
                   aria-label="Previous photo"
-                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-maroon-950/80 text-white border border-gold-400/40 hover:bg-gold-500 hover:text-maroon-950 transition-all"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-[#29180C]/80 text-white border border-[#D8A34F]/40 hover:bg-[#382314] hover:border-[#D8A34F] transition-all"
                 >
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
@@ -267,7 +264,7 @@ export function AttractionDynamicScroll({
                     setLightboxIndex((i) => (i + 1) % images.length)
                   }
                   aria-label="Next photo"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-maroon-950/80 text-white border border-gold-400/40 hover:bg-gold-500 hover:text-maroon-950 transition-all"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-[#29180C]/80 text-white border border-[#D8A34F]/40 hover:bg-[#382314] hover:border-[#D8A34F] transition-all"
                 >
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />

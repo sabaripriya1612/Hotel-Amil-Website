@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
     if (event.event === "payment.captured") {
       const payment = event.payload.payment.entity;
       const orderId = payment.order_id;
-      const paymentId = payment.id;
 
       if (isDbConnected() && orderId) {
         await initDatabase();

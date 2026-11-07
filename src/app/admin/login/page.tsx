@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -48,7 +47,7 @@ export default function AdminLoginPage() {
           <h1 className="font-display text-2xl font-bold tracking-tight text-slate-900">
             Hotel Amil
           </h1>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-maroon-800">
+          <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-[#382314]">
             Front Desk &amp; Operations Portal
           </p>
           <p className="mt-2 text-sm text-slate-500">
@@ -73,14 +72,14 @@ export default function AdminLoginPage() {
               onChange={(e) => setKey(e.target.value)}
               placeholder="Enter your security access key"
               autoFocus
-              className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-maroon-800 focus:ring-2 focus:ring-maroon-800/20"
+              className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-[#382314] focus:ring-2 focus:ring-[#382314]/20"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-maroon-800 py-3 text-sm font-bold text-white shadow-md transition hover:bg-maroon-900 active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+            className="w-full rounded-full bg-[#382314] py-3 text-sm font-semibold uppercase tracking-wider text-white shadow-sm transition hover:bg-[#4A301D] active:scale-[0.98] disabled:opacity-60 cursor-pointer"
           >
             {loading ? "Verifying Credentials..." : "Sign In to Control Center →"}
           </button>

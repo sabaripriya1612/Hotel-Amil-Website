@@ -10,6 +10,8 @@ import {
   isValidPhone,
   validateBookingDates,
   validateCsrfOrigin,
+  checkRateLimit,
+  generateSecureId,
 } from "@/lib/security";
 
 /**
@@ -23,6 +25,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Cross-site request blocked." }, { status: 403 });
     }
 
+    // Rate limiting on verification attempts
+    const ip = request.headers.get("x-forwarded-for") || "127.0.0.1";
+    const rateCheck = checkRateLimit(`pay-verify:${ip}`, 15, 60000);
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { error: "Too many payment verification requests. Please wait a moment." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json({ error: "Invalid payment verification payload." }, { status: 400 });
@@ -31,6 +43,10 @@ export async function POST(request: NextRequest) {
     const orderId = sanitizeText(body.razorpay_order_id, 100);
     const paymentId = sanitizeText(body.razorpay_payment_id, 100);
     const signature = sanitizeText(body.razorpay_signature, 255);
+
+    if (!orderId || !paymentId || !signature) {
+      return NextResponse.json({ error: "Missing required payment parameters." }, { status: 400 });
+    }
 
     // 1. Cryptographic HMAC Signature Verification
     const isValid = verifyPaymentSignature(orderId, paymentId, signature);
@@ -42,7 +58,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. Extract and Validate Booking Details
+    // 2. Replay / Duplicate Payment Protection: Check if this payment was already recorded
+    if (isDbConnected()) {
+      await initDatabase();
+      const existing = await query<any>(
+        `SELECT id, room_slug AS "roomSlug", room_title AS "roomTitle", guest_name AS "guestName",
+                total_amount AS "totalAmount", status, created_at AS "createdAt"
+         FROM amil_bookings
+         WHERE payment_method LIKE $1 LIMIT 1`,
+        [`%${paymentId}%`]
+      );
+      if (existing.length > 0) {
+        return NextResponse.json(
+          {
+            success: true,
+            message: "Payment already verified and reservation exists.",
+            booking: existing[0],
+            isDuplicate: true,
+          },
+          { status: 200 }
+        );
+      }
+    }
+
+    // 3. Extract and Validate Booking Details
     const b = body.booking || {};
     const roomSlug = sanitizeText(b.roomSlug, 100);
     const guestName = sanitizeText(b.name, 120);
@@ -69,7 +108,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid room category." }, { status: 404 });
     }
 
-    // 3. Price calculation
+    // 4. Price calculation
     const pricingRes = calculateStayPricing({
       roomSlug,
       checkIn,
@@ -84,11 +123,8 @@ export async function POST(request: NextRequest) {
     }
     const pricing = pricingRes.pricing;
 
-    // 4. Create confirmed booking
-    const bookingId = `AH-PAY-${new Date().getFullYear()}-${Math.random()
-      .toString(36)
-      .substring(2, 7)
-      .toUpperCase()}`;
+    // 5. Create confirmed booking with cryptographically secure ID
+    const bookingId = generateSecureId(`AH-PAY-${new Date().getFullYear()}`, 3);
 
     if (isDbConnected()) {
       await initDatabase();
@@ -113,7 +149,7 @@ export async function POST(request: NextRequest) {
           children,
           childrenUnder8,
           specialRequests,
-          `razorpay:${paymentId}`,
+          `razorpay:${paymentId}:${orderId}`,
           pricing.roomDailyPriceInclusive,
           pricing.extraPersonDailyPriceInclusive * pricing.extraPersons * pricing.nights,
           pricing.grandTotal,
