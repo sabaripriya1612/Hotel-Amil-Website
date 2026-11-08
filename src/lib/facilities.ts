@@ -16,36 +16,45 @@ export const facilities: Facility[] = [
     id: "saffron-manor-restaurant",
     slug: "saffron-manor-restaurant",
     name: "Saffron Restaurant",
-    tagline: "Multi-cuisine fine dining in Rajapalayam",
+    tagline: "Multi-cuisine fine dining & outdoor catering",
     description:
-      "Saffron Restaurant is a multi cuisine restaurant for fine dining in Rajapalayam. It serves world popular food items, North Indian & South Indian food created carefully to satisfy your taste. Air conditioned with good ambiance dining hall is the best place in Rajapalayam to relish good food with your family and friends. Saffron Restaurant also caters buffet for events and meetings.",
+      "Saffron Restaurant is a multi-cuisine fine dining restaurant in Rajapalayam, serving North Indian, South Indian, Tandoori, and Continental dishes crafted to perfection. Air conditioned with a warm, welcoming ambiance, our dining hall is the best place to relish good food with your family and friends. Saffron Restaurant also provides professional outdoor catering services available for external events, meetings, and celebrations.",
     image: "restaurant",
     details: [
       { label: "Cuisine", value: "Multi-cuisine (North & South Indian, Tandoori, Continental)" },
       { label: "Breakfast", value: "7:30 AM – 10:30 AM (CP Plan Buffet 7:30 – 9:30 AM)" },
       { label: "Lunch", value: "12:00 PM – 3:30 PM (South Indian Meals, Biryanis & A la Carte)" },
       { label: "Dinner", value: "7:00 PM – 11:00 PM (Tandoori Grills, Curries & Breads)" },
+      { label: "Outdoor Catering", value: "Professional catering services available for external events" },
       { label: "Dining Ambience", value: "Air-conditioned luxury fine dining hall" },
-      { label: "Buffet & Catering", value: "Available for meetings, parties & events" },
+      { label: "Buffet & Events", value: "Available for meetings, parties, weddings & external celebrations" },
     ],
-    highlights: ["Fine dining", "Buffet for events", "Air conditioned", "Family friendly"],
-    ctaLabel: "Table Reservation",
+    highlights: [
+      "Fine dining",
+      "Outdoor catering for external events",
+      "Buffet for events",
+      "Air conditioned",
+      "Family friendly",
+    ],
+    ctaLabel: "Table Reservation & Catering",
   },
   {
     id: "amil-cafe",
     slug: "amil-cafe",
-    name: "Amil Cafe",
-    tagline: "Coffee, tea & snacks — day and night",
+    name: "Amil Café Shop",
+    tagline: "In-house café serving fresh beverages & quick bites",
     description:
-      "Amil Cafe keeps the energy going around the clock. Enjoy fresh coffee, tea and light snacks at any hour. The cafe features a clean and comfortable seating area with neat washrooms available for both men and women.",
+      "Amil Café Shop is our in-house café serving fresh beverages and quick bites day and night. Enjoy freshly brewed South Indian filter coffee, aromatic tea, cool drinks, and light snacks around the clock. The café features a clean, comfortable seating ambiance with neat washrooms available for both men and women.",
     image: "cafe",
     details: [
-      { label: "Timing", value: "Open 24/7" },
-      { label: "Menu", value: "Coffee, tea & snacks" },
+      { label: "Concept", value: "In-house café serving fresh beverages and quick bites" },
+      { label: "Timing", value: "Open 24/7 (Day and Night)" },
+      { label: "Beverages", value: "Fresh filter coffee, tea varieties & cool beverages" },
+      { label: "Quick Bites", value: "Hot savory snacks, puffs & light bites" },
       { label: "Restrooms", value: "Neat washrooms for men & women" },
     ],
-    highlights: ["Open 24/7", "Fresh coffee & tea", "Snacks", "Clean restrooms"],
-    ctaLabel: "Visit Amil Cafe",
+    highlights: ["In-house café", "Fresh beverages", "Quick bites", "Open 24/7", "Clean restrooms"],
+    ctaLabel: "Visit Amil Café Shop",
   },
   {
     id: "kings-bar",
@@ -184,6 +193,9 @@ export const facilities: Facility[] = [
 export function getFacilityBySlug(slug: string): Facility | undefined {
   if (slug === "reception-events" || slug === "celebration") {
     return facilities.find((facility) => facility.slug === "celebrations");
+  }
+  if (slug === "outdoor-catering") {
+    return facilities.find((facility) => facility.slug === "saffron-manor-restaurant");
   }
   return facilities.find((facility) => facility.slug === slug);
 }

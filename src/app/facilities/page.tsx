@@ -8,7 +8,7 @@ import { facilities } from "@/lib/facilities";
 export const metadata: Metadata = {
   title: "Facilities | Hotel Amil, Rajapalayam",
   description:
-    "Explore Hotel Amil's facilities in Rajapalayam: Saffron Manor Restaurant, Amil Cafe 24/7, Kings Bar, swimming pool, banquet hall, conference hall and free parking.",
+    "Explore Hotel Amil's facilities in Rajapalayam: Saffron Restaurant, Amil Café Shop, Kings Bar, swimming pool, banquet hall, conference hall and free parking.",
 };
 
 export default function FacilitiesPage() {
@@ -17,7 +17,7 @@ export default function FacilitiesPage() {
       <PageHero
         eyebrow="HOTEL AMIL EXPERIENCES"
         title="Dine, Relax & Celebrate"
-        description="Every Hotel Amil facility is designed around comfortable luxury — from our multi-cuisine Saffron Restaurant and 24/7 cafe to our outdoor swimming pool, Kings Bar, and grand celebrations halls."
+        description="Every Hotel Amil facility is designed around comfortable luxury — from our multi-cuisine Saffron Restaurant and 24/7 Amil Café Shop to our outdoor swimming pool, Kings Bar, and grand celebrations halls."
         variant="facilities"
       />
 

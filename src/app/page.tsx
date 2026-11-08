@@ -35,11 +35,11 @@ export default function HomePage() {
     {
       title: "Dining at Saffron Restaurant",
       description:
-        "Relish rich Chettinad feasts, fragrant Biryanis, North Indian curries and Continental delicacies — with a complimentary breakfast buffet under the CP Plan.",
+        "Relish rich Chettinad feasts, fragrant Biryanis, Tandoori grills and North Indian curries — plus professional outdoor catering available for external events.",
       image: "/images/reest.png",
       badge: "Complimentary Breakfast (CP Plan)",
       href: "/facilities/saffron-manor-restaurant",
-      ctaLabel: "View the restaurant",
+      ctaLabel: "View restaurant & catering",
     },
     {
       title: "Celebrations & Events",
@@ -233,6 +233,77 @@ export default function HomePage() {
             {highlights.map((item) => (
               <HighlightCard key={item.href} {...item} />
             ))}
+          </div>
+
+          {/* Quick Hospitality Highlights: Amil Café Shop & Outdoor Catering */}
+          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            <Link
+              href="/facilities/amil-cafe"
+              className="group flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:border-[#382314]/40 hover:shadow-md"
+            >
+              <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl bg-stone-100">
+                <Image
+                  src="/images/cafe.png"
+                  alt="Amil Café Shop"
+                  fill
+                  sizes="96px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <div className="inline-flex items-center gap-2">
+                  <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800 border border-amber-200">
+                    Open 24/7
+                  </span>
+                  <span className="text-xs text-stone-400">·</span>
+                  <span className="text-xs text-stone-500 font-medium">In-House Café</span>
+                </div>
+                <h3 className="mt-1.5 font-display text-lg font-semibold text-[#1C1917] group-hover:text-[#382314] transition-colors">
+                  Amil Café Shop
+                </h3>
+                <p className="mt-1 text-xs sm:text-sm text-stone-600 font-sans leading-relaxed">
+                  In-house café serving fresh beverages and quick bites day and night, with comfortable seating and clean washroom amenities.
+                </p>
+                <span className="mt-2 text-xs font-semibold uppercase tracking-wider text-[#382314] group-hover:text-[#4A301D] inline-flex items-center gap-1">
+                  <span>Visit Café</span>
+                  <span aria-hidden="true" className="text-[#D8A34F] transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/facilities/saffron-manor-restaurant#outdoor-catering"
+              className="group flex flex-col sm:flex-row items-center gap-5 rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:border-[#382314]/40 hover:shadow-md"
+            >
+              <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl bg-stone-100">
+                <Image
+                  src="/images/restaa.png"
+                  alt="Outdoor Catering"
+                  fill
+                  sizes="96px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <div className="inline-flex items-center gap-2">
+                  <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200">
+                    Saffron Restaurant
+                  </span>
+                  <span className="text-xs text-stone-400">·</span>
+                  <span className="text-xs text-stone-500 font-medium">External Events</span>
+                </div>
+                <h3 className="mt-1.5 font-display text-lg font-semibold text-[#1C1917] group-hover:text-[#382314] transition-colors">
+                  Outdoor Catering
+                </h3>
+                <p className="mt-1 text-xs sm:text-sm text-stone-600 font-sans leading-relaxed">
+                  Professional catering services available for external events — weddings, corporate galas, and celebrations in Rajapalayam.
+                </p>
+                <span className="mt-2 text-xs font-semibold uppercase tracking-wider text-[#382314] group-hover:text-[#4A301D] inline-flex items-center gap-1">
+                  <span>View Catering</span>
+                  <span aria-hidden="true" className="text-[#D8A34F] transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </div>
+            </Link>
           </div>
 
           <div className="mt-12 text-center">

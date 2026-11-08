@@ -170,6 +170,53 @@ export default async function FacilityDetailPage({ params }: PageProps) {
                   </div>
                 </div>
               )}
+
+              {isRestaurant && (
+                <div id="outdoor-catering" className="rounded-2xl border border-[#D8A34F]/40 bg-white p-6 sm:p-8 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-stone-100 pb-5">
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800 border border-emerald-200/60">
+                        External Event Service
+                      </span>
+                      <h3 className="mt-2 font-display text-2xl font-semibold text-[#1C1917]">
+                        Outdoor Catering Services
+                      </h3>
+                      <p className="mt-1 text-xs sm:text-sm text-stone-600 font-sans leading-relaxed max-w-xl">
+                        Professional catering services available for external events — weddings, corporate functions, milestone anniversaries, and private parties across Rajapalayam.
+                      </p>
+                    </div>
+                    <a
+                      href={`https://wa.me/${siteConfig.whatsapp}?text=Hi,%20I%20am%20inquiring%20about%20Outdoor%20Catering%20services%20from%20Saffron%20Restaurant%20for%20my%20event.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#382314] hover:bg-[#4A301D] text-white px-6 py-2.5 text-xs font-semibold uppercase tracking-wider shadow-sm transition-all text-center"
+                    >
+                      Inquire for Catering →
+                    </a>
+                  </div>
+
+                  <div className="mt-5 grid gap-4 sm:grid-cols-3 text-left">
+                    <div className="rounded-xl border border-stone-200/80 bg-[#FAF8F5] p-4">
+                      <p className="text-xs uppercase tracking-wider font-semibold text-[#B88E3E]">Weddings &amp; Receptions</p>
+                      <p className="mt-1 text-xs text-stone-600 font-sans leading-relaxed">
+                        Authentic South &amp; North Indian wedding feasts, live counters, and traditional sweets.
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-stone-200/80 bg-[#FAF8F5] p-4">
+                      <p className="text-xs uppercase tracking-wider font-semibold text-[#B88E3E]">Corporate Meets</p>
+                      <p className="mt-1 text-xs text-stone-600 font-sans leading-relaxed">
+                        Executive lunch spreads, hot buffet stations, and tea-time refreshment counters.
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-stone-200/80 bg-[#FAF8F5] p-4">
+                      <p className="text-xs uppercase tracking-wider font-semibold text-[#B88E3E]">Private Celebrations</p>
+                      <p className="mt-1 text-xs text-stone-600 font-sans leading-relaxed">
+                        Tailored menus, live tandoor skewers, and full chafing &amp; uniformed service team.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-8 shadow-xs">
                 <h2 className="font-display text-2xl font-medium text-[#1C1917]">About</h2>
                 <p className="mt-3 leading-relaxed text-stone-600 font-sans">{facility.description}</p>

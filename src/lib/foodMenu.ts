@@ -1,4 +1,4 @@
-export type FoodCategory = "breakfast" | "lunch" | "dinner" | "starters";
+export type FoodCategory = "breakfast" | "lunch" | "dinner" | "starters" | "desserts";
 
 export interface FoodMenuItem {
   id: string;
@@ -41,6 +41,12 @@ export const foodCategories: {
     subtitle: "Crispy Appetizers, Tandoori Skewers & Bites",
     timeNote: "Available All Day",
   },
+  {
+    id: "desserts",
+    label: "Desserts",
+    subtitle: "Traditional Sweets, Rich Halwas & Chilled Delights",
+    timeNote: "Available All Day",
+  },
 ];
 
 // Defined dishes with real image mappings and authentic descriptions
@@ -51,6 +57,16 @@ const dosa: FoodMenuItem = {
   image: "/images/food/Dosa with Vada and Chutneys.jpeg",
   description:
     "Crisp golden South Indian crepe served with crispy medu vada, spiced sambar, and freshly ground coconut and tomato chutneys.",
+  dietary: "veg",
+};
+
+const venPongal: FoodMenuItem = {
+  id: "ven-pongal",
+  name: "Ven Pongal",
+  category: ["breakfast"],
+  image: "/images/food/ven-pongal.jpeg",
+  description:
+    "Traditional South Indian ghee ven pongal prepared with fragrant raw rice and yellow moong dal, tempered with whole black pepper, cumin seeds, ginger, and crunchy golden cashews.",
   dietary: "veg",
 };
 
@@ -98,7 +114,7 @@ const eggBiryani: FoodMenuItem = {
   id: "egg-biryani",
   name: "Egg Biryani",
   category: ["lunch", "dinner"],
-  image: "/images/food/Chicken Biryani.jpeg",
+  image: "/images/food/Egg-Biryani.jpg",
   description:
     "Aromatic dum-cooked basmati rice delicately spiced and layered with seasoned boiled eggs, caramelized onions, and fresh mint.",
   dietary: "non-veg",
@@ -274,13 +290,44 @@ const vegetableCutlets: FoodMenuItem = {
   dietary: "veg",
 };
 
+const halwa: FoodMenuItem = {
+  id: "halwa",
+  name: "Halwa",
+  category: ["desserts"],
+  image: "/images/food/halwa.png",
+  description:
+    "Rich, traditional melt-in-mouth wheat halwa slow-cooked with pure ghee and roasted cashews, infused with aromatic cardamom.",
+  dietary: "veg",
+};
+
+const iceCream: FoodMenuItem = {
+  id: "ice-cream",
+  name: "Ice Cream",
+  category: ["desserts"],
+  image: "/images/food/ice.png",
+  description:
+    "Rich and velvety chilled ice cream scoops served with delightful dessert toppings.",
+  dietary: "veg",
+};
+
+const breadHalwa: FoodMenuItem = {
+  id: "bread-halwa",
+  name: "Bread Halwa",
+  category: ["desserts"],
+  image: "/images/food/bread.png",
+  description:
+    "Royal South Indian delicacy of crisp golden bread simmered in milk, ghee, cardamom, and roasted dry fruits.",
+  dietary: "veg",
+};
+
 /**
  * Exact food order specified per category:
  *
  * Breakfast:
  * 1. Dosa
- * 2. South Indian Breakfast Platter (Idli, Vada, Pongal)
- * 3. Parotta
+ * 2. Ven Pongal
+ * 3. South Indian Breakfast Platter (Idli, Vada, Pongal)
+ * 4. Parotta
  *
  * Lunch:
  * 1. South Indian Meals
@@ -318,9 +365,14 @@ const vegetableCutlets: FoodMenuItem = {
  * 9. Paneer Tikka
  * 10. Hariyali Tikka
  * 11. Vegetable Cutlets with French Fries
+ *
+ * Desserts:
+ * 1. Halwa
+ * 2. Ice Cream
+ * 3. Bread Halwa
  */
 export const menuByCategory: Record<FoodCategory, FoodMenuItem[]> = {
-  breakfast: [dosa, southIndianBreakfastPlatter, parotta],
+  breakfast: [dosa, venPongal, southIndianBreakfastPlatter, parotta],
   lunch: [
     southIndianMeals,
     chickenBiryani,
@@ -358,11 +410,17 @@ export const menuByCategory: Record<FoodCategory, FoodMenuItem[]> = {
     hariyaliTikka,
     vegetableCutlets,
   ],
+  desserts: [
+    halwa,
+    iceCream,
+    breadHalwa,
+  ],
 };
 
 // All unique items
 export const foodMenuItems: FoodMenuItem[] = [
   dosa,
+  venPongal,
   southIndianBreakfastPlatter,
   parotta,
   southIndianMeals,
@@ -385,6 +443,9 @@ export const foodMenuItems: FoodMenuItem[] = [
   paneerTikka,
   hariyaliTikka,
   vegetableCutlets,
+  halwa,
+  iceCream,
+  breadHalwa,
 ];
 
 export function getFoodItemsByCategory(category: FoodCategory): FoodMenuItem[] {

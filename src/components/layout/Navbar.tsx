@@ -34,7 +34,7 @@ const facilityDropdownItems = [
   {
     href: "/facilities/saffron-manor-restaurant",
     label: "Saffron Restaurant",
-    desc: "Chettinad & multi-cuisine feasts",
+    desc: "Multi-cuisine dining & outdoor catering",
   },
   {
     href: "/menu",
@@ -48,8 +48,8 @@ const facilityDropdownItems = [
   },
   {
     href: "/facilities/amil-cafe",
-    label: "Amil Cafe",
-    desc: "Fresh coffee, tea & snacks",
+    label: "Amil Café Shop",
+    desc: "In-house café serving fresh beverages & quick bites",
   },
   {
     href: "/facilities/kings-bar",

@@ -7,11 +7,11 @@ import { FoodMenuClient } from "@/components/food/FoodMenuClient";
 export const metadata: Metadata = {
   title: "Food Menu | Saffron Restaurant | Hotel Amil Rajapalayam",
   description:
-    "Explore our delicious menu at Saffron Restaurant, Hotel Amil Rajapalayam. Breakfast, lunch, dinner, and starters freshly prepared with authentic ingredients.",
+    "Explore our delicious menu at Saffron Restaurant, Hotel Amil Rajapalayam. Breakfast, lunch, dinner, starters, and desserts freshly prepared with authentic ingredients.",
   openGraph: {
     title: "Food Menu | Saffron Restaurant | Hotel Amil",
     description:
-      "Explore our freshly prepared dishes across breakfast, lunch, dinner, and starters at Saffron Restaurant, Hotel Amil Rajapalayam.",
+      "Explore our freshly prepared dishes across breakfast, lunch, dinner, starters, and desserts at Saffron Restaurant, Hotel Amil Rajapalayam.",
   },
 };
 
@@ -21,7 +21,7 @@ export default function FoodMenuPage() {
       <PageHero
         eyebrow="SAFFRON RESTAURANT"
         title="Food Menu"
-        description="Freshly prepared dishes across Breakfast, Lunch, Dinner, and Starters — featuring Biryanis, Butter Chicken, Tandoori grills, and South Indian specialties."
+        description="Freshly prepared dishes across Breakfast, Lunch, Dinner, Starters, and Desserts — featuring Biryanis, Butter Chicken, Tandoori grills, traditional halwas, and South Indian specialties."
         variant="restaurant"
       />
 

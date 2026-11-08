@@ -72,7 +72,10 @@ export const imageCatalog: Record<string, string> = {
   restaurant: "/images/reest.png",
   "restaurant-buffet": "/images/restaa.png",
   "restaurant-dining": "/images/restt2.png",
+  catering: "/images/restaa.png",
+  "outdoor-catering": "/images/restaa.png",
   cafe: "/images/cafe.png",
+  "amil-cafe": "/images/cafe.png",
   "kings-bar": "/images/bar1.png",
   "bar-lounge": "/images/barimg2.png",
   "bar-cocktails": "/images/barimg3.png",
@@ -202,6 +205,11 @@ export const facilitySlides: Record<string, string[]> = {
   "amil-cafe": [
     "/images/cafe.png",
     "/images/cafe bathroom.jpeg",
+  ],
+  "outdoor-catering": [
+    "/images/restaa.png",
+    "/images/reest.png",
+    "/images/restt2.png",
   ],
   "kings-bar": [
     "/images/bar1.png",

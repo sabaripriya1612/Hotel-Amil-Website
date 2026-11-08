@@ -185,6 +185,8 @@ export function ContactForm() {
               "General Enquiry",
               "Room Booking",
               "Restaurant & Food Delivery",
+              "Outdoor Catering",
+              "Amil Café Shop",
               "Kings Bar",
               "Banquet / Event Booking",
               "Conference Hall",

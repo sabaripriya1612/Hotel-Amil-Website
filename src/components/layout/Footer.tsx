@@ -7,6 +7,7 @@ import { brandLogo } from "@/lib/images";
 const quickLinks = [
   { href: "/rooms", label: "Our Rooms" },
   { href: "/facilities/saffron-manor-restaurant", label: "Saffron Restaurant" },
+  { href: "/facilities/amil-cafe", label: "Amil Café Shop" },
   { href: "/menu", label: "Food Menu" },
   { href: "/facilities", label: "Facilities & Experiences" },
   { href: "/attractions", label: "Nearby Attractions" },
