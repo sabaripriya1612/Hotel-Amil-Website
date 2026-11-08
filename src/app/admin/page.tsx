@@ -279,9 +279,12 @@ export default function AdminDashboardPage() {
           <div className="flex items-center gap-2.5">
             <button
               onClick={loadDashboardData}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-xs transition hover:bg-slate-50 cursor-pointer"
             >
-              ↻ Refresh
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5 text-slate-500">
+                <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.451a.75.75 0 000-1.5H4.5a.75.75 0 00-.75.75v3.75a.75.75 0 001.5 0v-2.19l.524.523a7 7 0 0011.713-3.138.75.75 0 00-1.425-.499zM4.688 8.576a5.5 5.5 0 019.201-2.466l.312.311H11.75a.75.75 0 000 1.5h3.75a.75.75 0 00.75-.75V3.5a.75.75 0 00-1.5 0v2.19l-.524-.523A7 7 0 002.513 8.305a.75.75 0 001.425.499z" clipRule="evenodd" />
+              </svg>
+              <span>Refresh</span>
             </button>
             <button
               onClick={handleLogout}
@@ -338,7 +341,7 @@ export default function AdminDashboardPage() {
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
-            📋 Reservations Rack ({bookings.length})
+            Reservations Rack ({bookings.length})
           </button>
           <button
             onClick={() => setActiveTab("walkin")}
@@ -348,7 +351,7 @@ export default function AdminDashboardPage() {
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
-            🏨 New Walk-In Entry
+            New Walk-In Entry
           </button>
           <button
             onClick={() => setActiveTab("inventory")}
@@ -358,7 +361,7 @@ export default function AdminDashboardPage() {
                 : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
-            🛠️ Room Fleet &amp; Maintenance ({blocks.length} Blocks)
+            Room Fleet &amp; Maintenance ({blocks.length} Blocks)
           </button>
         </div>
 
@@ -771,7 +774,7 @@ export default function AdminDashboardPage() {
                   <button
                     type="submit"
                     disabled={blockLoading}
-                    className="w-full rounded-xl bg-amber-600 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-amber-700 transition disabled:opacity-60 cursor-pointer"
+                    className="w-full rounded-xl bg-maroon-800 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-maroon-900 transition active:scale-[0.98] disabled:opacity-60 cursor-pointer"
                   >
                     {blockLoading ? "Applying Block..." : "Apply Blackout Block"}
                   </button>

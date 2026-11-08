@@ -17,6 +17,8 @@ export default function GalleryPage() {
         title="Moments at Hotel Amil"
         description="A look at our executive rooms, Saffron Restaurant dining, swimming pool, and celebration spaces that make every stay memorable in Rajapalayam."
         variant="gallery"
+        image="/images/loby.png"
+        imageAlt="Hotel Amil Grand Lobby"
       />
       <section className="py-16 sm:py-20">
         <Container>

@@ -60,6 +60,30 @@ export function generateMetadata({ params }: PageProps): Promise<Metadata> {
   });
 }
 
+const facilityHeroImages: Record<string, string> = {
+  "saffron-manor-restaurant": "/images/reest.png",
+  "banquet-hall": "/images/hall.png",
+  "conference-hall": "/images/mainhall4.jpeg",
+  "kings-bar": "/images/bar1.png",
+  "celebrations": "/images/celebration1.jpeg",
+  "reception-events": "/images/celebration1.jpeg",
+  "amil-cafe": "/images/cafe.png",
+  "swimming-pool": "/images/swim1.png",
+  "car-parking": "/images/car-parking.png",
+};
+
+const facilityEyebrows: Record<string, string> = {
+  "saffron-manor-restaurant": "FINE DINING & CUISINE",
+  "banquet-hall": "GRAND WEDDINGS & CONFERENCES",
+  "conference-hall": "CORPORATE MEETS & PARTIES",
+  "kings-bar": "COCKTAIL LOUNGE & SPIRITS",
+  "celebrations": "SPECIAL OCCASIONS & PARTIES",
+  "reception-events": "SPECIAL OCCASIONS & PARTIES",
+  "amil-cafe": "24/7 FRESH BEVERAGES & BITES",
+  "swimming-pool": "REFRESHING OUTDOOR POOL",
+  "car-parking": "SECURE PARKING FOR GUESTS",
+};
+
 export default async function FacilityDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const facility = getFacilityBySlug(slug);
@@ -68,21 +92,96 @@ export default async function FacilityDetailPage({ params }: PageProps) {
   const isRestaurant = facility.id === "saffron-manor-restaurant";
   const isPool = facility.id === "swimming-pool";
   const slides = facilitySlides[facility.slug] ?? [];
+  const heroImage = facilityHeroImages[facility.slug] || "/images/hall.png";
+  const heroEyebrow = facilityEyebrows[facility.slug] || "FACILITY & EXPERIENCE";
 
   return (
     <main className="bg-[#FAF8F5] text-stone-900">
       <PageHero
-        eyebrow={isRestaurant ? "FINE DINING & CUISINE" : "FACILITY & EXPERIENCE"}
+        eyebrow={heroEyebrow}
         title={facility.name}
         description={facility.tagline}
         variant={isRestaurant ? "restaurant" : "facilities"}
-      />
+        image={heroImage}
+        imageAlt={`Hotel Amil ${facility.name}`}
+      >
+        {isRestaurant ? (
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/menu"
+              className="inline-flex items-center gap-2 rounded-full border border-[#D4A346] px-5 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all hover:border-[#E8B85A] hover:text-white active:scale-97 shadow-xs hover:shadow-md"
+            >
+              <span>Explore Food Menu</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-[#D4A346]">
+                <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+              </svg>
+            </Link>
+            <a
+              href="#photos"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 font-sans text-xs font-medium text-[#F5EEE6] hover:bg-white/20 transition-all"
+            >
+              <span>View Gallery</span>
+              <span>↓</span>
+            </a>
+          </div>
+        ) : isPool ? (
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="#photos"
+              className="inline-flex items-center gap-2 rounded-full border border-[#D4A346] px-5 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all hover:border-[#E8B85A] hover:text-white active:scale-97 shadow-xs hover:shadow-md cursor-pointer"
+            >
+              <span>See Pool Photos</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-[#D4A346]">
+                <path fillRule="evenodd" d="M10 3a.75.75 0 01.75.75v10.69l3.72-3.72a.75.75 0 111.06 1.06l-5 5a.75.75 0 01-1.06 0l-5-5a.75.75 0 111.06-1.06l3.72 3.72V3.75A.75.75 0 0110 3z" clipRule="evenodd" />
+              </svg>
+            </a>
+            <a
+              href="#policies"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 font-sans text-xs font-medium text-[#F5EEE6] hover:bg-white/20 transition-all cursor-pointer"
+            >
+              <span>Pool Rules &amp; Timings ↓</span>
+            </a>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-[#D4A346] px-5 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all hover:border-[#E8B85A] hover:text-white active:scale-97 shadow-xs hover:shadow-md"
+            >
+              <span>{facility.ctaLabel}</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-[#D4A346]">
+                <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+              </svg>
+            </Link>
+            <a
+              href="#photos"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 font-sans text-xs font-medium text-[#F5EEE6] hover:bg-white/20 transition-all"
+            >
+              <span>View Photos</span>
+              <span>↓</span>
+            </a>
+          </div>
+        )}
+      </PageHero>
 
       <section className="py-14 sm:py-16">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
             <div className="space-y-8">
               <div id="photos" className="scroll-mt-24">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#B88E3E]">
+                      {isPool ? "Hotel Amil Pool Gallery" : `${facility.name} Gallery`}
+                    </p>
+                    <h2 className="font-display text-2xl font-normal text-[#1C1917]">
+                      {isPool ? "Outdoor Swimming Pool Photos" : "Photo Gallery"}
+                    </h2>
+                  </div>
+                  <span className="text-xs text-stone-500 font-sans">
+                    {slides.length} Photos
+                  </span>
+                </div>
                 <FacilityGallery name={facility.name} slides={slides} />
               </div>
 
@@ -237,7 +336,7 @@ export default async function FacilityDetailPage({ params }: PageProps) {
               </div>
 
               {facility.policies && facility.policies.length > 0 && (
-                <div className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-8 shadow-xs">
+                <div id="policies" className="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-8 shadow-xs scroll-mt-24">
                   <div className="flex items-center justify-between border-b border-stone-100 pb-3">
                     <h2 className="font-display text-2xl font-medium text-[#1C1917]">
                       {isPool ? "HOTEL AMIL — POOL RULES" : "Policies & Guidelines"}

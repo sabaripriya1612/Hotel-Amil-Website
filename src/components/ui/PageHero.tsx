@@ -25,6 +25,9 @@ interface PageHeroProps {
   title: string;
   description?: string;
   variant?: HeroVariant;
+  image?: string;
+  imageAlt?: string;
+  hasOverlap?: boolean;
   breadcrumbs?: BreadcrumbItem[];
   children?: ReactNode;
   className?: string;
@@ -35,10 +38,26 @@ export function PageHero({
   title,
   description,
   variant = "rooms",
+  image,
+  imageAlt,
+  hasOverlap = false,
   breadcrumbs,
   children,
   className,
 }: PageHeroProps) {
+  const isAttractions = variant === "attractions";
+  const heroImage =
+    image ||
+    (variant === "rooms"
+      ? "/images/deluxe1.jpeg"
+      : variant === "restaurant"
+      ? "/images/reest.png"
+      : variant === "facilities"
+      ? "/images/hall.png"
+      : null);
+
+  const showPhotoHero = Boolean(heroImage) && !isAttractions;
+
   return (
     <section
       className={cn(
@@ -60,22 +79,43 @@ export function PageHero({
         className="pointer-events-none absolute -bottom-24 right-1/4 h-80 w-80 rounded-full bg-[#E7B765]/10 blur-3xl"
       />
 
-      {/* Thematic Decorative Illustration on the Right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 bottom-0 top-0 w-full sm:w-2/3 lg:w-1/2 flex items-end justify-end overflow-hidden select-none"
-      >
-        <HeroArt variant={variant} />
-      </div>
+      {/* Thematic Decorative Visual on the Right */}
+      {showPhotoHero && heroImage ? (
+        <PhotoHeroVisual
+          image={heroImage}
+          alt={imageAlt || title}
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 bottom-0 top-0 w-full sm:w-2/3 lg:w-1/2 flex items-end justify-end overflow-hidden select-none"
+        >
+          <HeroArt variant={variant} />
+        </div>
+      )}
 
       {/* Hero Content aligned to standard container */}
-      <Container className="relative z-10 py-7 sm:py-8 lg:py-9">
-        <div className="max-w-2xl">
+      <Container
+        className={cn(
+          "relative z-10",
+          showPhotoHero
+            ? hasOverlap
+              ? "pt-5 sm:pt-5.5 lg:pt-6 pb-12 sm:pb-14 lg:pb-16"
+              : "py-5 sm:py-5.5 lg:py-6"
+            : "py-7 sm:py-8 lg:py-9"
+        )}
+      >
+        <div
+          className={cn(
+            "max-w-2xl",
+            showPhotoHero && "max-w-md lg:max-w-[420px] xl:max-w-[450px]"
+          )}
+        >
           {/* Breadcrumbs if provided */}
           {breadcrumbs && breadcrumbs.length > 0 && (
             <nav
               aria-label="Breadcrumb"
-              className="mb-3.5 flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-[#F5EEE6]/75 font-sans"
+              className="mb-2 sm:mb-2.5 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#F5EEE6]/75 font-sans"
             >
               {breadcrumbs.map((crumb, idx) => (
                 <span key={crumb.label} className="flex items-center gap-2">
@@ -97,30 +137,148 @@ export function PageHero({
             </nav>
           )}
 
-          {/* Eyebrow Label */}
+          {/* Eyebrow Label with Luxury Accent Line */}
           {eyebrow && (
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-[#E7B765] font-sans">
-              {eyebrow}
+            <p className="flex items-center gap-2 text-[10.5px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-[#E7B765] font-sans">
+              <span>{eyebrow}</span>
+              <span className="inline-block h-px w-6 sm:w-10 bg-[#E7B765]/60" aria-hidden="true" />
             </p>
           )}
 
           {/* Main Heading */}
-          <h1 className="mt-2.5 font-display text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white leading-[1.15]">
+          <h1
+            className={cn(
+              "font-display font-normal tracking-tight text-white leading-[1.12]",
+              variant === "rooms" || variant === "restaurant"
+                ? "mt-1 sm:mt-1.5 text-2xl sm:text-3xl lg:text-[32px]"
+                : "mt-2.5 text-3xl sm:text-4xl md:text-5xl"
+            )}
+          >
             {title}
           </h1>
 
           {/* Description */}
           {description && (
-            <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-[#F5EEE6] font-sans max-w-xl">
+            <p
+              className={cn(
+                "leading-relaxed font-sans",
+                variant === "rooms" || variant === "restaurant"
+                  ? "mt-1.5 text-xs sm:text-[13px] max-w-sm sm:max-w-md text-[#F5EEE6]/90 line-clamp-2"
+                  : "mt-3.5 text-sm sm:text-base max-w-xl text-[#F5EEE6]"
+              )}
+            >
               {description}
             </p>
           )}
 
           {/* Optional Actions / CTA */}
-          {children && <div className="mt-5 sm:mt-6">{children}</div>}
+          {children && (
+            <div
+              className={cn(
+                variant === "rooms" || variant === "restaurant"
+                  ? "mt-2.5 sm:mt-3"
+                  : "mt-5 sm:mt-6"
+              )}
+            >
+              {children}
+            </div>
+          )}
         </div>
       </Container>
     </section>
+  );
+}
+
+/**
+ * Luxury Hotel Amil Photograph Visual with curved antique gold divider
+ * Replicating the authentic luxury banner design with hotel photography (rooms, restaurant).
+ */
+function PhotoHeroVisual({ image, alt }: { image: string; alt: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+    >
+      {/* Real Hotel Amil Photograph on the right */}
+      <div className="absolute inset-y-0 right-0 w-full lg:w-[65%] xl:w-[68%]">
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 68vw"
+          className="object-cover object-[center_40%]"
+        />
+        {/* Cinematic subtle contrast overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/15" />
+      </div>
+
+      {/* Mobile/Tablet Gradient Mask (< lg): smooth fade into dark espresso so text remains 100% legible */}
+      <div className="lg:hidden absolute inset-0 bg-gradient-to-r from-[#382314] via-[#382314]/90 to-transparent" />
+
+      {/* Desktop Curved Mask & Antique Gold Wave Divider (lg+) */}
+      <div className="hidden lg:block absolute inset-0">
+        <svg
+          viewBox="0 0 1000 500"
+          preserveAspectRatio="none"
+          className="h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            {/* Linear gradient matching the hero background */}
+            <linearGradient id="photoEspressoMask" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#382314" stopOpacity="1" />
+              <stop offset="65%" stopColor="#4A301D" stopOpacity="1" />
+              <stop offset="100%" stopColor="#4A301D" stopOpacity="1" />
+            </linearGradient>
+
+            {/* Radiant Antique Gold Ribbon Gradient */}
+            <linearGradient id="photoGoldRibbon" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#F5D491" stopOpacity="0.95" />
+              <stop offset="35%" stopColor="#E7B765" stopOpacity="1" />
+              <stop offset="70%" stopColor="#D8A34F" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#B37D32" stopOpacity="0.8" />
+            </linearGradient>
+
+            {/* Secondary Ambient Gold Ribbon */}
+            <linearGradient id="photoGoldSubtle" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#E7B765" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#D8A34F" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#8C5E28" stopOpacity="0.2" />
+            </linearGradient>
+
+            {/* Drop shadow for the curved edge */}
+            <filter id="photoCurveShadow" x="-10%" y="-10%" width="140%" height="120%">
+              <feDropShadow dx="10" dy="0" stdDeviation="12" floodColor="#150B05" floodOpacity="0.65" />
+            </filter>
+          </defs>
+
+          {/* Solid Espresso Panel on the Left with Curved Edge covering up to the photo */}
+          <path
+            d="M 0 0 L 395 0 C 435 125, 425 250, 395 350 C 380 415, 368 460, 355 500 L 0 500 Z"
+            fill="url(#photoEspressoMask)"
+            filter="url(#photoCurveShadow)"
+          />
+
+          {/* Secondary Layered Ambient Wave Arc */}
+          <path
+            d="M 377 0 C 417 125, 407 250, 377 350 C 362 415, 350 460, 337 500"
+            stroke="url(#photoGoldSubtle)"
+            strokeWidth="2.5"
+            fill="none"
+          />
+
+          {/* Primary Crisp Antique Gold Ribbon Contour */}
+          <path
+            d="M 395 0 C 435 125, 425 250, 395 350 C 380 415, 368 460, 355 500"
+            stroke="url(#photoGoldRibbon)"
+            strokeWidth="3.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+    </div>
   );
 }
 

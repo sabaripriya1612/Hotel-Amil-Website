@@ -19,9 +19,23 @@ export default function FacilitiesPage() {
         title="Dine, Relax & Celebrate"
         description="Every Hotel Amil facility is designed around comfortable luxury — from our multi-cuisine Saffron Restaurant and 24/7 Amil Café Shop to our outdoor swimming pool, Kings Bar, and grand celebrations halls."
         variant="facilities"
-      />
+        image="/images/hall.png"
+        imageAlt="Hotel Amil Facilities & Event Hall"
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href="#explore-facilities"
+            className="inline-flex items-center gap-2 rounded-full border border-[#D4A346] px-5 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all hover:border-[#E8B85A] hover:text-white active:scale-97 shadow-xs hover:shadow-md"
+          >
+            <span>Explore Facilities</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-[#D4A346]">
+              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </PageHero>
 
-      <section className="py-16 sm:py-20">
+      <section id="explore-facilities" className="py-16 sm:py-20">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {facilities.map((facility) => (

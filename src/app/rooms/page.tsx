@@ -17,11 +17,22 @@ export default function RoomsPage() {
       <PageHero
         eyebrow="STAY WITH US"
         title="Rooms & Suites"
-        description="Four thoughtfully designed room types with hill-view balconies, all modern comforts, and signature Hotel Amil hospitality in the heart of Rajapalayam."
+        description="Experience comfort and elegance in our beautifully designed rooms and suites, perfect for every traveler."
         variant="rooms"
-      />
+        hasOverlap
+      >
+        <a
+          href="#availability-search"
+          className="inline-flex items-center gap-2 rounded-full border border-[#D4A346] px-5 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all hover:border-[#E8B85A] hover:text-white active:scale-97 shadow-xs hover:shadow-md"
+        >
+          <span>Explore Rooms</span>
+          <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-[#D4A346]">
+            <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+          </svg>
+        </a>
+      </PageHero>
 
-      <section className="pt-8 sm:pt-10 pb-12 sm:pb-16 bg-[#FAF8F5]">
+      <section id="availability-search" className="pt-2 sm:pt-4 pb-12 sm:pb-16 bg-[#FAF8F5] relative z-20 -mt-6 sm:-mt-8">
         <Container>
           <AvailabilitySearch />
         </Container>

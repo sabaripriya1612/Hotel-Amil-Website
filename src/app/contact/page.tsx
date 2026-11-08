@@ -37,6 +37,8 @@ export default function ContactPage() {
         title="We Would Love to Hear From You"
         description="Whether it is a room for tonight, a table for lunch or a grand celebration — our reservations desk and concierge in Rajapalayam are ready to assist 24/7."
         variant="contact"
+        image="/images/reeception.png"
+        imageAlt="Hotel Amil Reception & Front Desk"
       />
 
       <section className="py-16 sm:py-20">

@@ -100,7 +100,7 @@ function NavItem({
       onClick={onNavigate}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "relative py-1 px-1 font-display text-sm xl:text-base font-medium tracking-wide transition-colors",
+        "relative py-1 px-1 font-display text-sm xl:text-base font-medium tracking-wide transition-colors shrink-0",
         isActive
           ? "text-[#382314] font-semibold"
           : "text-stone-700 hover:text-[#382314]"
@@ -160,9 +160,12 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#382314]/10 shadow-xs transition-all duration-300">
-      <nav className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav
+        className="mx-auto flex h-12 sm:h-14 w-[92%] sm:w-[88%] lg:w-fit items-center justify-between lg:justify-center px-3 sm:px-4 lg:px-6"
+        style={{ margin: "0 auto" }}
+      >
         {/* Left Navigation Links (Desktop) */}
-        <div className="hidden lg:flex items-center gap-7 xl:gap-9 flex-1 justify-end pr-7 lg:pr-9">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-5 justify-end pr-4 xl:pr-5 whitespace-nowrap">
           {navLinksLeft.map((link) => (
             <NavItem
               key={link.href}
@@ -175,7 +178,7 @@ export function Navbar() {
           {/* FACILITIES dropdown */}
           <div
             ref={facilitiesRef}
-            className="relative py-1"
+            className="relative py-1 shrink-0"
             onMouseEnter={() => setFacilitiesOpen(true)}
             onMouseLeave={() => setFacilitiesOpen(false)}
           >
@@ -247,7 +250,7 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Center Logo (Slightly increased in size for enhanced elegance) */}
+        {/* Center Logo */}
         <div className="flex items-center justify-center shrink-0 px-2">
           <Link
             href="/"
@@ -261,13 +264,13 @@ export function Navbar() {
               width={190}
               height={95}
               priority
-              className="h-10 sm:h-11 lg:h-12 w-auto object-contain transition-all duration-300"
+              className="h-8 sm:h-9 lg:h-10 w-auto object-contain transition-all duration-300"
             />
           </Link>
         </div>
 
         {/* Right Navigation Links, Cart & Book Now Button (Desktop) */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-start pl-7 lg:pl-9">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-5 justify-start pl-4 xl:pl-5 whitespace-nowrap">
           {navLinksRight.map((link) => (
             <NavItem
               key={link.href}
@@ -283,7 +286,7 @@ export function Navbar() {
             onClick={closeMenus}
             aria-label={`Booking cart with ${cartItemsCount} items`}
             className={cn(
-              "relative flex items-center gap-1.5 py-1 px-1 font-display text-sm xl:text-base font-medium tracking-wide transition-colors",
+              "relative flex items-center gap-1.5 py-1 px-1 font-display text-sm xl:text-base font-medium tracking-wide transition-colors shrink-0",
               pathname === "/cart"
                 ? "text-[#382314] font-semibold"
                 : "text-stone-700 hover:text-[#382314]"
@@ -307,7 +310,7 @@ export function Navbar() {
           <Link
             href="/rooms"
             onClick={closeMenus}
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-4.5 py-1.5 sm:px-5 sm:py-2 font-display text-xs sm:text-[12.5px] font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all duration-300 ease-out cursor-pointer select-none active:scale-97 shrink-0 border-[1.5px] border-[#D4A346] hover:border-[#E8B85A] hover:text-[#FFF6E9] shadow-[0_2px_8px_rgba(20,10,5,0.3),inset_0_1px_1px_rgba(255,235,180,0.18)] hover:shadow-[0_4px_14px_rgba(30,16,8,0.45),inset_0_1px_1.5px_rgba(255,235,180,0.28)]"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-3.5 py-1 sm:px-4 sm:py-1.5 font-display text-xs sm:text-[12px] font-semibold uppercase tracking-[0.16em] text-[#F0DCBE] transition-all duration-300 ease-out cursor-pointer select-none active:scale-97 shrink-0 border-[1.5px] border-[#D4A346] hover:border-[#E8B85A] hover:text-[#FFF6E9] shadow-[0_2px_8px_rgba(20,10,5,0.3),inset_0_1px_1px_rgba(255,235,180,0.18)] hover:shadow-[0_4px_14px_rgba(30,16,8,0.45),inset_0_1px_1.5px_rgba(255,235,180,0.28)]"
             style={{
               background:
                 "radial-gradient(ellipse at 50% 25%, #3E2716 0%, #25160C 65%, #150B05 100%)",
@@ -396,7 +399,7 @@ export function Navbar() {
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="animate-fade-in max-h-[calc(100dvh_-_4.5rem)] overflow-y-auto overscroll-contain border-t border-stone-200/90 bg-[#FAF7F2] px-6 py-6 lg:hidden"
+          className="animate-fade-in max-h-[calc(100dvh_-_3.5rem)] overflow-y-auto overscroll-contain border-t border-stone-200/90 bg-[#FAF7F2] px-6 py-6 lg:hidden"
         >
           <div className="space-y-1">
             {mobileLinks.map((link) => {

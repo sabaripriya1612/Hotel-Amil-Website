@@ -222,8 +222,11 @@ export const facilitySlides: Record<string, string[]> = {
   "swimming-pool": [
     "/images/swim1.png",
     "/images/dayswim1.png",
+    "/images/dayswim2.png",
     "/images/swdaytree.png",
+    "/images/swtree.png",
     "/images/n8swim1.png",
+    "/images/dimswim.png",
     "/images/swim2.png",
   ],
   "banquet-hall": [

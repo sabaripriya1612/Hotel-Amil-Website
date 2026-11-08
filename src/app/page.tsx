@@ -59,14 +59,14 @@ export default function HomePage() {
         id="home-hero"
         className="relative bg-[#1A1412]"
       >
-        <div className="relative h-[calc(100svh-4rem)] sm:h-[calc(100svh-5rem)] min-h-[520px] max-h-[920px] w-full overflow-hidden bg-black">
+        <div className="relative h-[calc(100svh-3rem)] sm:h-[calc(100svh-3.5rem)] min-h-[520px] max-h-[920px] w-full overflow-hidden bg-black">
           <HeroSlider
             slides={photoSlides}
             dotsClassName="bottom-28 sm:bottom-32 lg:bottom-28"
           />
 
           {/* Cinematic subtle gradient overlay */}
-          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/25 to-black/45" />
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/85 via-black/20 to-black/15" />
 
           {/* Hero Headline Overlay: Experience Comfort & Elegance in Rajapalayam (Top Left Corner) */}
           <div className="pointer-events-none absolute inset-x-0 top-5 sm:top-7 md:top-9 lg:top-10 z-20">
