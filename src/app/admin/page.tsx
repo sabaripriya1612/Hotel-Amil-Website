@@ -267,7 +267,7 @@ export default function AdminDashboardPage() {
           <div className="flex items-center gap-3">
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base font-bold text-slate-900 tracking-tight">Hotel Amil</h1>
+                <h1 className="text-base font-bold text-slate-900 tracking-tight font-display">Hotel Amil</h1>
                 <span className="rounded-full bg-maroon-50 border border-maroon-200/80 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-maroon-800">
                   Front Desk Operations
                 </span>
@@ -521,7 +521,7 @@ export default function AdminDashboardPage() {
         {/* TAB 2: WALK-IN BOOKING ENTRY */}
         {activeTab === "walkin" && (
           <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs">
-            <h2 className="text-lg font-bold text-slate-900">Create Walk-In / Phone Reservation</h2>
+            <h2 className="text-lg font-bold text-slate-900 font-display">Create Walk-In / Phone Reservation</h2>
             <p className="mt-1 text-xs text-slate-500">
               Immediately books a room into inventory, issues instant confirmation, and allocates room keys.
             </p>
@@ -692,7 +692,7 @@ export default function AdminDashboardPage() {
           <div className="mt-6 space-y-8">
             {/* Physical Inventory Overview */}
             <div>
-              <h2 className="text-base font-bold text-slate-900">Physical Room Fleet &amp; Capacity</h2>
+              <h2 className="text-base font-bold text-slate-900 font-display">Physical Room Fleet &amp; Capacity</h2>
               <p className="text-xs text-slate-500 mt-0.5">Live availability across all 5 hotel room categories.</p>
               <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-5">
                 {rooms.map((r) => {
@@ -719,7 +719,7 @@ export default function AdminDashboardPage() {
             {/* Block Creation Form & List */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-                <h3 className="text-sm font-bold text-slate-900">Schedule Maintenance Blackout Block</h3>
+                <h3 className="text-sm font-bold text-slate-900 font-display">Schedule Maintenance Blackout Block</h3>
                 <p className="mt-1 text-xs text-slate-500">
                   Takes a room offline for cleaning, AC service, or repair so guests cannot book it online.
                 </p>
@@ -783,7 +783,7 @@ export default function AdminDashboardPage() {
 
               {/* Active Blocks */}
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
-                <h3 className="text-sm font-bold text-slate-900">Active Room Blackouts ({blocks.length})</h3>
+                <h3 className="text-sm font-bold text-slate-900 font-display">Active Room Blackouts ({blocks.length})</h3>
                 {blocks.length === 0 ? (
                   <p className="mt-8 text-center text-xs text-slate-400">
                     No active maintenance blocks. All rooms are available for online booking.
